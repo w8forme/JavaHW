@@ -1,8 +1,10 @@
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class BoobleSort
+
+public class InsertionSort
 {
+
     //Метод для генерации случайных чисел.
     private int randomInt(int min, int max)
     {
@@ -42,22 +44,19 @@ public class BoobleSort
     }
 
     //Метод для сортировки входящего массива.
-    public int[] bSort(int[] array)
+    public int[] insSort(int[] array)
     {
         int count = 0;
-
-        for (int i = array.length; i > 0; i--)
+        for (int i = 1; i < array.length; i++)
         {
+            int currentNum = array[i];
+            int prevNum;
 
-            for (int j = 0; j < i - 1; j++, count++)
+            for (prevNum = i - 1; prevNum >= 0 && array[prevNum] > currentNum; prevNum--, count++)
             {
-                if (array[j] < array[j + 1])
-                {
-                    int buf = array[j];
-                    array[j] = array[j + 1];
-                    array[j + 1] = buf;
-                }
+                array[prevNum + 1] = array[prevNum];
             }
+            array[prevNum + 1] = currentNum;
             System.out.println(Arrays.toString(array));
         }
         System.out.println("---------------------------------");
@@ -67,8 +66,8 @@ public class BoobleSort
 
     public static void main(String[] args)
     {
-        BoobleSort a = new BoobleSort();
+        InsertionSort a = new InsertionSort();
         int x = a.userInput();
-        a.bSort(a.randomArr(x));
+        a.insSort(a.randomArr(x));
     }
 }
