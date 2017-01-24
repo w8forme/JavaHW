@@ -44,17 +44,17 @@ public class BoobleSort
     //Метод для сортировки входящего массива.
     public int[] bSort(int[] array)
     {
-        int buf, count = 0;
+        int count = 0;
 
         for (int i = 0; i < array.length - 1; i++)
         {
-            for (int j = 0; j < array.length - 1; j++, count++)
+            for (int j = i + 1; j < array.length; j++, count++)
             {
-                if (array[j] < array[j + 1])
+                if (array[i] < array[j])
                 {
-                    buf = array[j];
-                    array[j] = array[j + 1];
-                    array[j + 1] = buf;
+                    int buf = array[j];
+                    array[j] = array[i];
+                    array[i] = buf;
                 }
             }
             System.out.println(Arrays.toString(array));
