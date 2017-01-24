@@ -34,7 +34,7 @@ public class TwoDimArr
             System.out.println("");
         }
         System.out.println("---------------------------------------");
-        System.out.print("Сумма всех чисел в массиве: " + result);
+        System.out.print("РЎСѓРјРјР° РІСЃРµС… С‡РёСЃРµР» РІ РјР°СЃСЃРёРІРµ: " + result);
         return result;
     }
 

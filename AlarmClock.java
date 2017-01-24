@@ -8,19 +8,19 @@ public class AlarmClock
         int num;
         do
         {
-            System.out.print("Введите число от 0 до 24: ");
+            System.out.print("Р’РІРµРґРёС‚Рµ С‡РёСЃР»Рѕ РѕС‚ 0 РґРѕ 24: ");
             num = in.nextInt();
         }
         while (num < 0 | num > 24);
         {
             if (num >= 8 && num <= 21)
             {
-                System.out.println("Привет!");
+                System.out.println("РџСЂРёРІРµС‚!");
                 in.close();
             }
             else
             {
-                System.out.println("Абонент занят!");
+                System.out.println("РђР±РѕРЅРµРЅС‚ Р·Р°РЅСЏС‚!");
                 in.close();
             }
         }

@@ -3,13 +3,13 @@ import java.util.Scanner;
 
 public class BoobleSort
 {
-    //Метод для генерации случайных чисел.
+    //РњРµС‚РѕРґ РґР»СЏ РіРµРЅРµСЂР°С†РёРё СЃР»СѓС‡Р°Р№РЅС‹С… С‡РёСЃРµР».
     private int randomInt(int min, int max)
     {
         return (int) (Math.random() * (++max - min)) + min;
     }
 
-    //Метод для создания и заполнения массива случайными числами.
+    //РњРµС‚РѕРґ РґР»СЏ СЃРѕР·РґР°РЅРёСЏ Рё Р·Р°РїРѕР»РЅРµРЅРёСЏ РјР°СЃСЃРёРІР° СЃР»СѓС‡Р°Р№РЅС‹РјРё С‡РёСЃР»Р°РјРё.
     private int[] randomArr(int size)
     {
         int[] arr = new int[size];
@@ -17,21 +17,21 @@ public class BoobleSort
         {
             arr[i] = randomInt(0,99);
         }
-        System.out.println("Был создан массив размером " + size + " и заполнен случайными числами:\n" + Arrays.toString(arr)+ "\n");
+        System.out.println("Р‘С‹Р» СЃРѕР·РґР°РЅ РјР°СЃСЃРёРІ СЂР°Р·РјРµСЂРѕРј " + size + " Рё Р·Р°РїРѕР»РЅРµРЅ СЃР»СѓС‡Р°Р№РЅС‹РјРё С‡РёСЃР»Р°РјРё:\n" + Arrays.toString(arr)+ "\n");
         return arr;
     }
 
-    //Получение размера массива от пользователя
+    //РџРѕР»СѓС‡РµРЅРёРµ СЂР°Р·РјРµСЂР° РјР°СЃСЃРёРІР° РѕС‚ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
     private int userInput()
     {
         Scanner in = new Scanner(System.in);
         while (true)
         {
-            System.out.print("Введите желаемый размер массива: ");
+            System.out.print("Р’РІРµРґРёС‚Рµ Р¶РµР»Р°РµРјС‹Р№ СЂР°Р·РјРµСЂ РјР°СЃСЃРёРІР°: ");
             int num = in.nextInt();
             if (num <= 0)
             {
-                System.out.println("Недопустимый размер массива! Значение должно быть больше нуля!\n");
+                System.out.println("РќРµРґРѕРїСѓСЃС‚РёРјС‹Р№ СЂР°Р·РјРµСЂ РјР°СЃСЃРёРІР°! Р—РЅР°С‡РµРЅРёРµ РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ Р±РѕР»СЊС€Рµ РЅСѓР»СЏ!\n");
             }
             else
             {
@@ -41,7 +41,7 @@ public class BoobleSort
         }
     }
 
-    //Метод для сортировки входящего массива.
+    //РњРµС‚РѕРґ РґР»СЏ СЃРѕСЂС‚РёСЂРѕРІРєРё РІС…РѕРґСЏС‰РµРіРѕ РјР°СЃСЃРёРІР°.
     public int[] bSort(int[] array)
     {
         int count = 0;
@@ -60,7 +60,7 @@ public class BoobleSort
             System.out.println(Arrays.toString(array));
         }
         System.out.println("---------------------------------");
-        System.out.println("Всего было сделано " + count + " операций.");
+        System.out.println("Р’СЃРµРіРѕ Р±С‹Р»Рѕ СЃРґРµР»Р°РЅРѕ " + count + " РѕРїРµСЂР°С†РёР№.");
         return array;
     }
 
