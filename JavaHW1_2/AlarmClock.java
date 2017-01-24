@@ -10,10 +10,10 @@ public class AlarmClock
         int num;
         do
         {
-            System.out.print("Введите число от 0 до 24: ");
+            System.out.print("Введите число от 1 до 24: ");
             num = in.nextInt();
         }
-        while (num < 0 | num > 24);
+        while (num < 1 | num > 24);
         {
             if (num >= 8 && num <= 21)
             {
