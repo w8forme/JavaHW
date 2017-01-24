@@ -1,10 +1,8 @@
 import java.util.Arrays;
 import java.util.Scanner;
 
-
-public class InsertionSort
+public class SelectSort
 {
-
     //Метод для генерации случайных чисел.
     private int randomInt(int min, int max)
     {
@@ -44,19 +42,22 @@ public class InsertionSort
     }
 
     //Метод для сортировки входящего массива.
-    public int[] insSort(int[] array)
+    public int[] selSort(int[] array)
     {
         int count = 0;
-        for (int i = 1; i < array.length; i++)
+        for (int i = 0; i < array.length - 1; i++)
         {
-            int currentNum = array[i];
-            int prevIndex;
-
-            for (prevIndex = i - 1; prevIndex >= 0 && array[prevIndex] > currentNum; prevIndex--, count++)
+            int sIndex = i;
+            for (int j = i + 1; j < array.length; j++, count++)
             {
-                array[prevIndex + 1] = array[prevIndex];
+                if (array[sIndex] > array[j])
+                {
+                    sIndex = j;
+                }
             }
-            array[prevIndex + 1] = currentNum;
+            int buf = array[i];
+            array[i] = array[sIndex];
+            array[sIndex] = buf;
             System.out.println(Arrays.toString(array));
         }
         System.out.println("---------------------------------");
@@ -66,8 +67,9 @@ public class InsertionSort
 
     public static void main(String[] args)
     {
-        InsertionSort a = new InsertionSort();
+        SelectSort a = new SelectSort();
         int x = a.userInput();
-        a.insSort(a.randomArr(x));
+        a.selSort(a.randomArr(x));
     }
+
 }
