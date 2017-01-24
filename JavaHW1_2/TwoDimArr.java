@@ -1,3 +1,4 @@
+package JavaHW1_2;
 
 public class TwoDimArr
 {
