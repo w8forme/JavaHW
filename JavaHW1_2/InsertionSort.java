@@ -19,7 +19,7 @@ public class InsertionSort
         int[] arr = new int[size];
         for (int i = 0; i < arr.length; i++)
         {
-            arr[i] = randomInt(0,99);
+            arr[i] = randomInt(-99,99);
         }
         System.out.println("Был создан массив размером " + size + " и заполнен случайными числами:\n" + Arrays.toString(arr)+ "\n");
         return arr;
