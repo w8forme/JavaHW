@@ -1,4 +1,4 @@
-package JavaHW3.Bouns_random;
+package JavaHW3.Task_1;
 
 public class Employee {
 

@@ -1,8 +1,5 @@
-package JavaHW3.Students;
+package JavaHW3.Task_2;
 
-/**
- * Created by Home on 30.01.2017.
- */
 public class Student
 {
     private String name;

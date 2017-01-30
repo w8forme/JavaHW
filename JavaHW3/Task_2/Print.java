@@ -1,13 +1,8 @@
-package JavaHW3.Students;
-
-import java.util.ArrayList;
+package JavaHW3.Task_2;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
-/**
- * Created by Home on 30.01.2017.
- */
 public class Print
 {
 

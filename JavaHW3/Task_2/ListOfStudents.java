@@ -1,4 +1,4 @@
-package JavaHW3.Students;
+package JavaHW3.Task_2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ public class ListOfStudents
 {
     public static List<Student> studList()
     {
-        List<Student> studList = new ArrayList<Student>();
+        List<Student> studList = new ArrayList<Student>(11);
 
         studList.add(new Student ("Белик Анна Дмитриевна", 3));
         studList.add(new Student ("Дубровская Татьяна Валерьевна", 1));

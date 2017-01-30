@@ -1,4 +1,4 @@
-package JavaHW3.Bouns_random;
+package JavaHW3.Task_1;
 import java.util.ArrayList;
 import java.util.List;
 
