@@ -1,5 +1,4 @@
 package JavaHW3.Task_3;
-
 import java.util.HashMap;
 import java.util.Map;
 

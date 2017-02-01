@@ -1,11 +1,7 @@
 package JavaHW3.Task_2;
-
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Home on 30.01.2017.
- */
 public class ListOfStudents
 {
     public static List<Student> studList()

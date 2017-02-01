@@ -8,7 +8,7 @@ public class FileInput
     //This method read file and save data to LinkedHashMap, english word is key, russian is value.
     public static Map<String, String> fileRead()
     {
-        String filePath = "CoursesHomeTasks\\src\\JavaHW3\\Task_4\\english-russian.txt";
+        String filePath = "CoursesHomeTasks\\src\\JavaHW3\\Task_4\\english-russian.txt"; //This path need to be changed
         String line;
         Map<String, String> map = new LinkedHashMap<String, String>();
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath)))
@@ -25,9 +25,10 @@ public class FileInput
                 }
             }
 
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
-            System.out.println("Error!");
+            System.err.println("Error!" + e.getMessage());
         }
         return map;
     }

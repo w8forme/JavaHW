@@ -1,5 +1,8 @@
 package JavaHW3.Task_4;
 import java.util.Scanner;
+/*
+Change default path to file "english-russian.txt" in class "FileInput".
+*/
 
 public class Dictionary
 {
