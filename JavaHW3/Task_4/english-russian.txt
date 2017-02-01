@@ -1,5 +1,6 @@
-﻿white:белый
-black:черный
-red:красный
-pink:розовый
-blue:синий
+﻿white белый
+black черный
+red красный
+pink розовый
+blue синий
+orange оранжевый

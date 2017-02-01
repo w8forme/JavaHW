@@ -9,13 +9,14 @@ public class FileInput
     public static Map<String, String> fileRead()
     {
         String filePath = "CoursesHomeTasks\\src\\JavaHW3\\Task_4\\english-russian.txt";
-        Map<String, String> map = new LinkedHashMap<String, String>();
         String line;
+        Map<String, String> map = new LinkedHashMap<String, String>();
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath)))
         {
             while ((line = reader.readLine()) != null)
             {
-                String[] parts = line.split(":", 2);
+                //Create array for storing key-value pair and than put it in map
+                String[] parts = line.split(" ", 2);
                 if (parts.length >= 2)
                 {
                     String key = parts[0];
@@ -26,7 +27,7 @@ public class FileInput
 
         } catch (Exception e)
         {
-            e.printStackTrace();
+            System.out.println("Error!");
         }
         return map;
     }
