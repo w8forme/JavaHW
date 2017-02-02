@@ -6,14 +6,6 @@ package Week2.Task_7;
 public class ShowNode
 {
 
-
-
-    public void backWardNode(Node node)
-    {
-
-
-    }
-
     public static void main(String[] args)
     {
         MyList a = new MyList();
@@ -22,12 +14,8 @@ public class ShowNode
         a.addTail(15);
         a.addTail(3);
         a.addTail(8);
-        a.displayList();
+        a.displayList(a.find(39));
         a.displayListReverse(a.find(39));
-
-
-
-
 
     }
 }

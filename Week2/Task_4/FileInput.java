@@ -5,17 +5,17 @@ import java.util.*;
 
 public class FileInput
 {
-    //This method read file and save data to LinkedHashMap, english word is key, russian is value.
+    //This method reads the file and saves the data to the LinkedHashMap, the english word is a key, the russian one is a value.
     public static Map<String, String> fileRead()
     {
-        String filePath = "CoursesHomeTasks\\src\\Week2\\Task_4\\english-russian.txt"; //This path need to be changed
+        String filePath = "CoursesHomeTasks\\src\\Week2\\Task_4\\english-russian.txt"; //This path needs to be changed
         String line;
         Map<String, String> map = new LinkedHashMap<String, String>();
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath)))
         {
             while ((line = reader.readLine()) != null)
             {
-                //Create array for storing key-value pair and than put it in map
+                //Create array for storing key-value pairs and than put it in the map
                 String[] parts = line.split(" ", 2);
                 if (parts.length >= 2)
                 {

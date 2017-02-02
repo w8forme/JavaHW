@@ -37,53 +37,60 @@ public class MyList
         sizeList++;
     }
 
-    public Node find(int key)
+    //The method is used for finding the first element of the list, if
+    public Node find(int firstKey)
     {
         Node current = head;
-        while (current.getElem() != key)
+        while (current.getElem() != firstKey)
         {
             if (current.getNext() == null)
             {
-                return null; // didn't find it
+                System.out.println("Значение не найдено!");
+                return null; //didn't find it
             }
             else
             {
-                current = current.getNext(); // not end of list, go to next link
+                current = current.getNext(); //It's not the end of the list, go to the next link
             }
         }
-        return current; // found it
+        return current;
     }
 
-    public void displayList()
+    //The method is used for showing our list in the sorted order
+    public void displayList(Node node)
     {
-        System.out.println("List (first to last): ");
-        Node current = head;
-        while (current != null)
+        if (null == node)
         {
-            System.out.print(current);
-            current = current.getNext();
+            return;
         }
-        System.out.println();
+        else
+        {
+            System.out.println("List (first to last): ");
+            Node current = node;
+            while (current != null)
+            {
+                System.out.print(current);
+                current = current.getNext();
+            }
+            System.out.println();
+        }
     }
 
+    //The method is used for showing our list in the reverse order
     public void displayListReverse(Node node)
     {
-        Node current = node;
-        Node previous = null;
-        Node next = null;
+        Node current = node; //head of un reversed lis
+        Node previous = null; //head of reversed list
+        Node next; //node to be reversed
         while (current != null)
         {
-            System.out.print(current);
             next = current.getNext();
             current.setNext(previous);
             previous = current;
             current = next;
         }
-        System.out.println();
+        displayList(previous); //After the list was sorted in reverse order, we call the method to show our list
     }
-
-
-
 
     public MyList()
     {
