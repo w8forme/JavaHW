@@ -13,7 +13,6 @@ import java.util.List;
 public class Library
 {
 
-
     public static List<String> toList()
     {
         String line;
@@ -25,7 +24,6 @@ public class Library
             {
                 songList.add(line);
             }
-
         }
         catch (FileNotFoundException e)
         {
