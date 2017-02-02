@@ -2,6 +2,9 @@ package Week2.Task_2;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Created by Pavel
+ */
 public class ListOfStudents
 {
     public static List<Student> studList()

@@ -14,7 +14,7 @@ public class FileReader
     public static List<Song> toList()
     {
         String line;
-        String filePath = "CoursesHomeTasks\\src\\Week2\\Task_6\\SongsLibrary.txt";
+        String filePath = "CoursesHomeTasks\\src\\Week2\\Task_6\\SongsLibrary.txt"; //The path must be changed
         List<Song> songList = new ArrayList<Song>();
         try (BufferedReader reader = new BufferedReader(new java.io.FileReader(filePath)))
         {

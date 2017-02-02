@@ -1,6 +1,8 @@
 package Week2.Task_3;
 
-
+/**
+ * Created by Pavel
+ */
 public class Employee
 {
     private String name;

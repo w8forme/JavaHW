@@ -1,7 +1,9 @@
 package Week2.Task_3;
 import java.util.HashMap;
 import java.util.Map;
-
+/**
+ * Created by Pavel
+ */
 public class EmployeeMap
 {
 

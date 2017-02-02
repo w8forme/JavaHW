@@ -2,7 +2,7 @@ package Week2.Task_6;
 import java.util.*;
 
 /**
- * Created by Pavel
+ *  For the right work of the app you need to change the path for the file "SongLibrary.txt" in the class "FileReader"
  */
 public class SortSongs
 {

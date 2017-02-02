@@ -3,6 +3,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
+/**
+ * Created by Pavel
+ */
 public class Bonus {
 
     private double userInput()

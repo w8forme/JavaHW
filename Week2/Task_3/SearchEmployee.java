@@ -2,6 +2,9 @@ package Week2.Task_3;
 import java.util.Map;
 import java.util.Scanner;
 
+/**
+ * Created by Pavel
+ */
 public class SearchEmployee
 {
     private int userInput()

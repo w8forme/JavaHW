@@ -6,10 +6,11 @@ import java.util.List;
  */
 public class MyList
 {
-    private Node head;
-    private Node tail;
-    private int sizeList = 0;
+    private Node head;                  //Head of the list
+    private Node tail;                  //Tail of the list
+    private int sizeList = 0;           //Size of the list
 
+    //The method is for adding elements to the head of the list
     public void addHead(int elem)
     {
         if (null == head)
@@ -25,6 +26,7 @@ public class MyList
         sizeList++;
     }
 
+    //The method is for adding elements to the tail of the list
     public void addTail(int elem) {
         if (null == head) {
             head = new Node(elem, null);
@@ -65,14 +67,14 @@ public class MyList
         }
         else
         {
-            System.out.println("List (first to last): ");
+            System.out.print("Список: ");
             Node current = node;
             while (current != null)
             {
                 System.out.print(current);
                 current = current.getNext();
             }
-            System.out.println();
+            System.out.println("\nРазмер списка: " + sizeList + "\n");
         }
     }
 
