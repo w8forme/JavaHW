@@ -22,15 +22,7 @@ public class SortSongs
             }
             while (choice < 0 && choice > 3);
             {
-                switch (choice)
-                {
-                    case 1:
-                    case 2:
-                    case 3:
-                        return choice;
-                    default:
-                        break;
-                }
+                return choice;
             }
         }
         catch (Exception e)
