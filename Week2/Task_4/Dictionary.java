@@ -29,6 +29,6 @@ public class Dictionary
     public static void main(String[] args)
     {
         Dictionary a = new Dictionary();
-        Search.showWord(FileInput.fileRead(), a.userInput());
+        Search.showWord(Utillites.parsAndCreate(), a.userInput());
     }
 }

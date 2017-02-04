@@ -1,5 +1,4 @@
 package Week2.Task_7;
-import java.util.List;
 
 /**
  * Created by Pavel
@@ -93,6 +92,7 @@ public class MyList
         }
         displayList(previous); //After the list was sorted in reverse order, we call the method to show our list
     }
+
 
     public MyList()
     {
