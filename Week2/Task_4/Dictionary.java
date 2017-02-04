@@ -1,4 +1,8 @@
 package Week2.Task_4;
+import Week2.Task_4.Utills.FillMap;
+import Week2.Task_4.Utills.HandleUserInput;
+import jdk.internal.org.objectweb.asm.Handle;
+
 import java.util.Scanner;
 
 /**
@@ -9,26 +13,13 @@ public class Dictionary
     //User input
     private String userInput()
     {
-        String word = "";
-        try (Scanner in = new Scanner(System.in))
-        {
-            System.out.print("Введите слово на английском: ");
-            word = in.nextLine();
-
-        } catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        finally
-        {
-            return word;
-        }
+        return HandleUserInput.handle();
     }
 
 
     public static void main(String[] args)
     {
         Dictionary a = new Dictionary();
-        Search.showWord(Utillites.parsAndCreate(), a.userInput());
+        Search.showWord(FillMap.parsAndCreate(), a.userInput());
     }
 }

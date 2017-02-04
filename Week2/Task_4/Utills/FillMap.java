@@ -1,4 +1,4 @@
-package Week2.Task_4;
+package Week2.Task_4.Utills;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -10,7 +10,7 @@ import java.util.*;
  * <p>
  * Parsing file and creating LinkedHashMap
  */
-public class Utillites
+public class FillMap
 {
     static List<String> arrList = new ArrayList<String>();
     static Map<String, String> map = new LinkedHashMap<String, String>();
