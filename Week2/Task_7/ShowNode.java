@@ -15,7 +15,7 @@ public class ShowNode
         a.addTail(3);
         a.addTail(8);
         a.displayList(a.find(39));
-        a.displayListReverse(a.find(39));
+        a.displayListReverse(a.find(15));
 
 
     }
