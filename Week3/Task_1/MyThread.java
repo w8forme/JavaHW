@@ -13,7 +13,7 @@ public class MyThread implements Runnable
     {
         thread = new Thread(this, name);
         thread.start();
-    }
+}
 
     @Override
     public void run()
