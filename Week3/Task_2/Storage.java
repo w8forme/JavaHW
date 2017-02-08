@@ -8,57 +8,47 @@ import java.util.List;
  */
 public class Storage
 {
-    private volatile int applesQuantity; //Total amount apples in the storage
-    private volatile List<Apple> apples; //Storage for apples, which the producer gather
-    private volatile boolean hasApples = false; //Is storage has apples
+    private int applesQuantity; //Total amount apples in the storage
+    private List<Apple> apples; //Storage for apples, which the producer gather
+    private boolean hasApples; //Is storage has apples
 
-    public synchronized void putApple(Apple apple)
+    public synchronized void putApple(Apple apple) throws InterruptedException
     {
+        while (hasApples)
+        {
+            String nameOfCurrentThread = Thread.currentThread().getName();
+            System.out.printf((char) 27 + "[31m" + nameOfCurrentThread + (char) 27 + "[0m" + ": На складе достаточно яблок!\n");
+            wait();
+        }
         apples.add(apple);
         applesQuantity += apple.getAppleQuantity();
         System.out.printf("На склад поступило %d яблок сорта %s\n", apple.getAppleQuantity(), apple.getAppleName());
-        System.out.println("Сейчас на складе всего яблок: " + applesQuantity + "\n");
-        hasApples = true;
-        notify();
+        System.out.println("Сейчас на складе всего яблок: " + applesQuantity);
+        notifyAll();
     }
 
     public synchronized List<Apple> sellApples() throws InterruptedException
     {
-        if (!apples.isEmpty())
+        while (!hasApples)
         {
-            List<Apple> applesToShop = new ArrayList<>(apples);
-            apples.clear();
-            System.out.printf("Было продано %d яблок.\n", applesQuantity);
-            applesQuantity = 0;
-            hasApples = false;
-            return applesToShop;
+            String nameOfCurrentThread = Thread.currentThread().getName();
+            System.out.printf((char) 27 + "[31m" + nameOfCurrentThread + (char) 27 + "[0m" + ": Жду яблок!\n");
+            wait();
         }
-        else
-        {
-            System.out.println("На складе отсутствуют яблоки! Ожидайте!");
-            while (apples.isEmpty())
-            {
-                wait();
-            }
-            return apples;
-        }
-    }
-
-    // приватный конструктор - из вне нельзя будет создать объект.
-    private Storage()
-    {
+        List<Apple> applesToShop = new ArrayList<>(apples);
+        apples.clear();
+        //System.out.printf("Было продано %d яблок.\n", applesQuantity);
         applesQuantity = 0;
-        apples = new ArrayList<Apple>();
+        hasApples = false;
+        notifyAll();
+        return applesToShop;
     }
 
-    public static Storage getInstance()
+    public Storage()
     {
-        return StorageHolder.HOLDER_INSTANCE;
-    }
-
-    static class StorageHolder
-    {
-        private static final Storage HOLDER_INSTANCE = new Storage();
+        hasApples = false;
+        applesQuantity = 0;
+        apples = new ArrayList<>();
     }
 
     public int getApplesQuantity()

@@ -6,12 +6,13 @@ package Week3.Task_2;
 public class Main
 {
 
-    public static void main(String[] args)
+    public static void main(String[] args) throws InterruptedException
     {
-        Producer farmer = new Producer("Фермер Вася");
-        Storage storeHouse = Storage.getInstance();
-        Shop_1 shop1 = new Shop_1(5000, "Магазин яблок №1");
-        //Shop_1 shop2 = new Shop_1(10000, "Магазин яблок №2");
+        Storage st = new Storage();
+        Producer farmer = new Producer(st, "Фермер Вася");
+        Thread.sleep(10000);
+        Shop_1 shop1 = new Shop_1(st, 5000, "Магазин яблок №1");
+        Shop_1 shop2 = new Shop_1(st, 10000, "Магазин яблок №2");
 
 
     }

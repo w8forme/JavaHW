@@ -11,36 +11,27 @@ public class Shop_1 implements Runnable
     private List<Apple> applesInShop; //The list with all apples in shop
     private int quantityApples; //Amount apples in shop
     private int sellSpeed; //Bigger number will increase sleep time for thread
-    private String threadName;
     private Thread thread;
+    Storage storage;
 
-    public Shop_1(int sellSpeed, String threadName)
+    public Shop_1(Storage storage, int sellSpeed, String threadName)
     {
         thread = new Thread(this, threadName);
         thread.start();
         this.sellSpeed = sellSpeed;
-        this.threadName = threadName;
+        this.storage = storage;
     }
 
     private void delivery()
     {
         try
         {
-            this.applesInShop = Storage.getInstance().sellApples();
-            if (applesInShop != null || !applesInShop.isEmpty())
+            this.applesInShop = storage.sellApples();
+            for (Apple apple : applesInShop)
             {
-                for (Apple apple : applesInShop)
-                {
-                    quantityApples += apple.getAppleQuantity();
-                }
+                quantityApples += apple.getAppleQuantity();
             }
-            else
-            {
-                thread.sleep(500);
-                System.out.printf("Жду яблок\n\n");
-            }
-        }
-        catch (InterruptedException e)
+        } catch (InterruptedException e)
         {
             e.printStackTrace();
         }
@@ -58,18 +49,17 @@ public class Shop_1 implements Runnable
                 try
                 {
                     thread.sleep(sellSpeed); // Shop sell speed
-                    System.out.println(thread.getName()); // Name of shop
                     count = apple.getAppleQuantity(); // Amount sort of apples
                     howMuchSell += count; // How much apples were sold
                     quantityApples -= count; // How much apples left at the shop
                     iterator.remove(); //Remove apples that were sold
-                    System.out.printf("Продали %d яблок сорта %s\n\n", count, apple.getAppleName());
+                    System.out.printf((char) 27 + "[31m" + thread.getName() + (char) 27 + "[0m" + ": Продали %d яблок сорта %s\n\n", count, apple.getAppleName());
                 } catch (InterruptedException e)
                 {
                     e.printStackTrace();
                 }
             }
-            System.out.printf("Все яблоки проданы! Всего было продано %d яблок.\n\n", howMuchSell);
+            System.out.printf((char) 27 + "[31m" + thread.getName() + (char) 27 + "[0m" + ": Все яблоки проданы! Всего было продано %d яблок.\n\n", howMuchSell);
         }
     }
 
@@ -87,7 +77,7 @@ public class Shop_1 implements Runnable
                 } else
                 {
                     delivery();
-                    System.out.printf("Продали в %s, %d яблок.\n", thread.getName(), quantityApples);
+                    System.out.printf("Продали в %s, %d яблок.\n", (char) 27 + "[31m" + thread.getName() + (char) 27 + "[0m", quantityApples);
                 }
             } catch (InterruptedException e)
             {
