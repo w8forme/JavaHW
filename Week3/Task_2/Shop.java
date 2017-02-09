@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Created by Pavel
  */
-public class Shop_1 implements Runnable
+public class Shop implements Runnable
 {
     private List<Apple> applesInShop; //The list with all apples in shop
     private int quantityApples; //Amount apples in shop
@@ -14,7 +14,7 @@ public class Shop_1 implements Runnable
     private Thread thread;
     Storage storage;
 
-    public Shop_1(Storage storage, int sellSpeed, String threadName)
+    public Shop(Storage storage, int sellSpeed, String threadName)
     {
         thread = new Thread(this, threadName);
         thread.start();

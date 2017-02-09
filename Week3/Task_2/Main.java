@@ -11,8 +11,8 @@ public class Main
         Storage st = new Storage();
         Producer farmer = new Producer(st, "Фермер Вася");
         Thread.sleep(10000);
-        Shop_1 shop1 = new Shop_1(st, 5000, "Магазин яблок №1");
-        Shop_1 shop2 = new Shop_1(st, 10000, "Магазин яблок №2");
+        Shop shop1 = new Shop(st, 5000, "Магазин яблок №1");
+        Shop shop2 = new Shop(st, 10000, "Магазин яблок №2");
 
 
     }

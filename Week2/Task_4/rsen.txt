@@ -11945,7 +11945,7 @@
 оживляться:chirk
 оживший мертвец:zombie
 ожидаемый:pending, prospective
-ожидание:waiting, expectancy, anticipation, expectation
+ожидание:customersInShop, expectancy, anticipation, expectation
 ожидать:look forward, expect
 ожидающий:expectant
 ожог:scorch, scald
