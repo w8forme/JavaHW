@@ -1,5 +1,6 @@
 package Week2.Task_4;
-import java.util.Scanner;
+import Week2.Task_4.Utills.FillMap;
+import Week2.Task_4.Utills.HandleUserInput;
 
 /**
  * Change default path to file "english-russian.txt" in class "FileInput".
@@ -9,26 +10,13 @@ public class Dictionary
     //User input
     private String userInput()
     {
-        String word = "";
-        try (Scanner in = new Scanner(System.in))
-        {
-            System.out.print("Введите слово на английском: ");
-            word = in.nextLine();
-
-        } catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        finally
-        {
-            return word;
-        }
+        return HandleUserInput.handle();
     }
 
 
     public static void main(String[] args)
     {
         Dictionary a = new Dictionary();
-        Search.showWord(FileInput.fileRead(), a.userInput());
+        Search.showWord(FillMap.parsAndCreate(), a.userInput());
     }
 }

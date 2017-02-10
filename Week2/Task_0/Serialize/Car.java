@@ -22,7 +22,7 @@ public class Car implements Serializable
     @Override
     public String toString()
     {
-        return "Car{" +
+        return "Player{" +
                 "passengers=" + passengers +
                 ", color='" + color + '\'' +
                 ", parts=" + Arrays.toString(parts) +
