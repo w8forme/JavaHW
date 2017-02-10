@@ -12,7 +12,7 @@ public class Shop implements Runnable
     private int quantityApples; //Amount apples in shop
     private int sellSpeed; //Bigger number will increase sleep time for thread
     private Thread thread;
-    Storage storage;
+    Storage storage; //Link for our storage
 
     public Shop(Storage storage, int sellSpeed, String threadName)
     {
@@ -22,6 +22,7 @@ public class Shop implements Runnable
         this.storage = storage;
     }
 
+    //Method for delivering apples to the shop
     private void delivery()
     {
         try
@@ -29,7 +30,7 @@ public class Shop implements Runnable
             this.applesInShop = storage.sellApples();
             for (Apple apple : applesInShop)
             {
-                quantityApples += apple.getAppleQuantity();
+                quantityApples += apple.getAppleQuantity(); //Count how many apples we receive frm storage
             }
         } catch (InterruptedException e)
         {

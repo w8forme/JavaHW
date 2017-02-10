@@ -7,10 +7,11 @@ import java.util.concurrent.CyclicBarrier;
  */
 public class Stadium
 {
-    private boolean raining;
-    public static boolean played = false;
+    private boolean raining; //It is used for checking if it is raining
+    public static boolean played = false; //It is used for checking if the game was played
     public final CyclicBarrier BARRIER = new CyclicBarrier(10, new Field(this));
 
+    //Generate weather randomly
     public void weatherGenerator()
     {
         raining = Math.random() < 0.5;
@@ -24,6 +25,7 @@ public class Stadium
         }
     }
 
+    //Counts the days of week
     public void gameCounter() throws InterruptedException
     {
         for (int i = 1; i <= 10; i++)
@@ -44,12 +46,13 @@ public class Stadium
 
         while (true)
         {
+            //If there was no game do the next code
             if (!Stadium.played)
             {
                 try
                 {
-                    st.gameCounter();
-                    st.weatherGenerator();
+                    st.gameCounter(); //Count days
+                    st.weatherGenerator(); //Generate weather
                     for (int i = 1; i <= 10; i++)
                     {
                         new Football_Player(st, i);

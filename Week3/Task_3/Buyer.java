@@ -28,7 +28,7 @@ public class Buyer implements Runnable
             thread.sleep(AutoShop.getAuctionDuration() / reaction);
             if (AutoShop.getInstance().getCarsQuantity() > 0)
             {
-                AutoShop.getInstance().setCarsQuantity();
+                AutoShop.getInstance().setCarsQuantity(); //Decrease quantity of cars by 1, when somebody buys a car
                 System.out.println(thread.getName() + " купил себе новенький автомобиль!");
             }
             else

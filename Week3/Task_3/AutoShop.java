@@ -11,9 +11,9 @@ public class AutoShop
     private static final int AUCTION_DURATION = 900000;
     private volatile int carsQuantity;
 
+    //Method for counting cars
     public void carsCount() throws InterruptedException
     {
-
         for (int i = 1; i <= 5; i++)
         {
             System.out.println("Считаем машины: " + i);

@@ -14,7 +14,7 @@ public class Storage
 
     public synchronized void putApple(Apple apple) throws InterruptedException
     {
-        while (hasApples)
+        while (hasApples) //If storage has apples, producer wait
         {
             String nameOfCurrentThread = Thread.currentThread().getName();
             System.out.printf((char) 27 + "[31m" + nameOfCurrentThread + (char) 27 + "[0m" + ": На складе достаточно яблок!\n");
@@ -29,15 +29,14 @@ public class Storage
 
     public synchronized List<Apple> sellApples() throws InterruptedException
     {
-        while (!hasApples)
+        while (!hasApples) //Wait if storage doesn't have apples
         {
             String nameOfCurrentThread = Thread.currentThread().getName();
             System.out.printf((char) 27 + "[31m" + nameOfCurrentThread + (char) 27 + "[0m" + ": Жду яблок!\n");
             wait();
         }
-        List<Apple> applesToShop = new ArrayList<>(apples);
-        apples.clear();
-        //System.out.printf("Было продано %d яблок.\n", applesQuantity);
+        List<Apple> applesToShop = new ArrayList<>(apples); //Create new list (package with apples), which we give to the shop
+        apples.clear(); //Clear list with our apples
         applesQuantity = 0;
         hasApples = false;
         notifyAll();

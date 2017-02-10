@@ -13,12 +13,11 @@ public class Producer implements Runnable
     {
         Apple sort1;
         Apple sort2;
-        int gatherAmount;
+        int gatherAmount; //How many apples gather farmer
 
         for (int i = 0; i < gatherTime; i++)
         {
-            //System.out.println("Собираю яблоки!");
-            gatherAmount = (int) (Math.random() * 10) + 1;
+            gatherAmount = (int) (Math.random() * 10) + 1; //Choose randomly the amount of apples
             thread.sleep(gatherDelay);
             if (i % 2 == 0)
             {

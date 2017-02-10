@@ -23,7 +23,7 @@ public class Football_Player implements Runnable
         try
         {
             System.out.println(thread.getName() + " пришел на стадион.");
-            stadium.BARRIER.await();
+            stadium.BARRIER.await(); //Wait until 10 players gather together
             if (stadium.isRaining())
             {
                 System.out.println("Сегодня дождь! Игра переносится на следующую неделю!");

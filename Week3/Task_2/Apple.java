@@ -5,8 +5,8 @@ package Week3.Task_2;
  */
 public class Apple
 {
-    private String appleName;
-    private int appleQuantity;
+    private String appleName; //Sort of apple
+    private int appleQuantity; //How many apples of this sort
 
     @Override
     public String toString()

@@ -14,6 +14,7 @@ public class Main
             Thread.sleep(1000);
         }
 
+        //Checking if all the cars were gathered
         while (AutoShop.getSTART().getCount() > 1)
         {
             Thread.sleep(100);
