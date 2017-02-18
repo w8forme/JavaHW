@@ -19,8 +19,6 @@ public class ServerChat
     private List<ServerLogic> countClients; //Contains all clients, who successfully connected to server
     private ExecutorService exservice; //Each client receive own thread
 
-
-
     public ServerChat()
     {
         this.names = new HashSet<String>();

@@ -62,13 +62,12 @@ public class ServerLogic implements Runnable
                     out.writeUTF("К сожалению, имя " + userName + " уже занято! Попробуйте еще раз! " + "\n");
                 }
             }
-
             String line = null;
             while (true)
             {
                 if (in.available() > 0)
                 {
-                    line = in.readUTF(); // ожидаем пока клиент пришлет строку текста.
+                    line = in.readUTF(); //Wait until client send a text
 
                     synchronized (this)
                     {
@@ -84,73 +83,4 @@ public class ServerLogic implements Runnable
             e.printStackTrace();
         }
     }
-
-/*    @Override
-    public void run()
-    {
-        InputStream ins = null;
-        OutputStream outs = null;
-        DataInputStream in = null;
-        DataOutputStream out = null;
-        try
-        {
-            address = InetAddress.getByName("127.0.0.1");
-            socket = new Socket(address, SERVER_PORT);
-            ins = socket.getInputStream();
-            outs = socket.getOutputStream();
-            in = new DataInputStream(ins);
-            out = new DataOutputStream(outs);
-            BufferedReader keyboard = new BufferedReader(new InputStreamReader(System.in)); //Read text from client
-            String name = in.readUTF();
-
-
-
-            String text;
-            while (true) {
-                text = keyboard.readLine(); // Wait until user input something and press Enter
-                System.out.println("Sending this line to the server...");
-                out.writeUTF(text); // отсылаем введенную строку текста серверу.
-                out.flush(); // заставляем поток закончить передачу данных.
-                text = in.readUTF(); // ждем пока сервер отошлет строку текста.
-                System.out.println(text);
-            }
-
-        } catch (UnknownHostException e)
-        {
-            e.printStackTrace();
-        } catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-        finally
-        {
-            try
-            {
-                if (null != ins)
-                {
-                    ins.close();
-                }
-                if (null != outs)
-                {
-                    outs.close();
-                }
-                if (null != in)
-                {
-                    in.close();
-                }
-                if (null != out)
-                {
-                    out.close();
-                }
-                if (null != socket)
-                {
-                    socket.close();
-                }
-
-            } catch (IOException e)
-            {
-                e.printStackTrace();
-            }
-        }
-    }*/
 }

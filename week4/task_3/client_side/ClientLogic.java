@@ -21,18 +21,11 @@ public class ClientLogic implements Runnable
         this.in = in;
     }
 
-    /*
-         * Create a thread to read from the server. (non-Javadoc)
-         *
-         * @see java.lang.Runnable#run()
-         */
+
     @Override
     public void run()
     {
-    /*
-     * Keep on reading from the client socket till we receive "Bye" from the
-     * server. Once we received that then we want to break.
-     */
+    // Keep on reading from the client socket till we receive "/quit" from the server. Once we received that then we want to break.
         String responseLine;
         try
         {

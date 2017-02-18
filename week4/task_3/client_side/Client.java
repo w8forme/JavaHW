@@ -4,6 +4,7 @@ import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.Hashtable;
 
 /**
  * Created by Pavel
@@ -24,15 +25,12 @@ public class Client
     {
         Client client = new Client();
         client.connection();
-
-
+        String str = "sss";
     }
 
     public void connection()
     {
-        /*
-     * Open a clientSocket on a given host and port. Open input and output streams.
-     */
+     // Open a clientSocket on a given host and port. Open input and output streams.
         try
         {
             address = InetAddress.getByName("127.0.0.1");
@@ -50,25 +48,21 @@ public class Client
             System.err.println("Couldn't get I/O for the connection to the host " + address);
         }
 
-    /*
-     * If everything has been initialized then we want to write some data to the
-     * clientSocket we have opened a connection to on the port portNumber.
-     */
         if (clientSocket != null && out != null && in != null)
         {
             try
             {
 
-        /* Create a thread to read from the server. */
+        // Create a thread to read from the server.
                 new Thread(new ClientLogic(in)).start();
 
                 while (!closed)
                 {
                     out.writeUTF(keyboard.readLine().trim());
                 }
-        /*
-         * Close the output stream, close the input stream, close the clientSocket.
-         */
+
+          //Close the output stream, close the input stream, close the clientSocket.
+
                 out.close();
                 in.close();
                 clientSocket.close();
@@ -78,74 +72,4 @@ public class Client
             }
         }
     }
-
-
-
-
-
-    /*public void run()
-    {
-        InputStream ins = null;
-        OutputStream outs = null;
-        DataInputStream in = null;
-        DataOutputStream out = null;
-        try
-        {
-
-            ins = clientSocket.getInputStream();
-            outs = clientSocket.getOutputStream();
-            in = new DataInputStream(ins);
-            out = new DataOutputStream(outs);
-            String name = in.readUTF();
-
-            BufferedReader keyboard = new BufferedReader(new InputStreamReader(System.in)); //Read text from client
-
-            String text;
-            while (true)
-            {
-                text = keyboard.readLine(); // Wait until user input something and press Enter
-                System.out.println("Sending this line to the server...");
-                out.writeUTF(text); // отсылаем введенную строку текста серверу.
-                out.flush(); // заставляем поток закончить передачу данных.
-                text = in.readUTF(); // ждем пока сервер отошлет строку текста.
-                System.out.println(text);
-            }
-
-        } catch (UnknownHostException e)
-        {
-            e.printStackTrace();
-        } catch (IOException e)
-        {
-            e.printStackTrace();
-        } finally
-        {
-            try
-            {
-                if (null != ins)
-                {
-                    ins.close();
-                }
-                if (null != outs)
-                {
-                    outs.close();
-                }
-                if (null != in)
-                {
-                    in.close();
-                }
-                if (null != out)
-                {
-                    out.close();
-                }
-                if (null != clientSocket)
-                {
-                    clientSocket.close();
-                }
-
-            } catch (IOException e)
-            {
-                e.printStackTrace();
-            }
-        }
-    }*/
 }
