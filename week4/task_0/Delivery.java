@@ -1,4 +1,4 @@
-package week4.task_0.src.main.java;
+package week4.task_0;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
