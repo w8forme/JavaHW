@@ -13,6 +13,8 @@ public class ReadFromFile
     private String model;       //Model name
     private double price;       //The price of the car
     private int id_engine;      //Engine installed into the car
+    private double displacement;//Displacement of specific engine (1000 - 3000 cc)
+    private double power;       //Engine power (60-280 hp)
 
     private int randomInt(int min, int max)
     {
@@ -23,10 +25,9 @@ public class ReadFromFile
     {
         Set<Car> cars = new LinkedHashSet<Car>();
         Car car;
-       // String filePath = "cars.txt";
-        String filePath2 = "cars2.txt";
+        String filePath = "cars2.txt";
         String[] parts;
-        try (Scanner scan = new Scanner(new FileReader(filePath2)))
+        try (Scanner scan = new Scanner(new FileReader(filePath)))
         {
             while (scan.hasNext())
             {
@@ -39,8 +40,7 @@ public class ReadFromFile
                 car = new Car(year, make, model, price, id_engine);
                 cars.add(car);
             }
-        }
-        catch (FileNotFoundException e)
+        } catch (FileNotFoundException e)
         {
             e.printStackTrace();
         }
@@ -48,5 +48,27 @@ public class ReadFromFile
     }
 
 
-
+    public Set<Engine> parsAndCreateEngine()
+    {
+        Set<Engine> engines = new LinkedHashSet<Engine>();
+        Engine engine;
+        String filePath = "engines.txt";
+        String[] parts;
+        try (Scanner scan = new Scanner(new FileReader(filePath)))
+        {
+            while (scan.hasNext())
+            {
+                parts = scan.nextLine().split(", ");
+                displacement = Integer.parseInt(parts[0]);
+                power = Integer.parseInt(parts[1]);
+                engine = new Engine(displacement, power);
+                engines.add(engine);
+            }
+        } catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+        return engines;
+    }
 }
+
