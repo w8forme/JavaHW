@@ -1,5 +1,4 @@
 package week5;
-import java.sql.Timestamp;
 
 /**
  * Created by Pavel
@@ -11,14 +10,15 @@ public class Car
     private String make;        //Maker of the car
     private String model;       //Model name
     private double price;       //The price of the car
-    private int id_engine;      //Engine installed into the car
+    private Engine engine;      //Engine installed into the car
+    private int id_engine;      //Field for adding cars into database
 
-    public Car(int id, int year, String make, String model, double price, int id_engine)
+    public Car(int id, int year, String make, String model, double price, Engine engine)
     {
         this.id = id;
         this.model = model;
         this.make = make;
-        this.id_engine = id_engine;
+        this.engine = engine;
         this.price = price;
         this.year = year;
     }
@@ -90,5 +90,15 @@ public class Car
     public void setYear(int year)
     {
         this.year = year;
+    }
+
+    public Engine getEngine()
+    {
+        return engine;
+    }
+
+    public void setEngine(Engine engine)
+    {
+        this.engine = engine;
     }
 }

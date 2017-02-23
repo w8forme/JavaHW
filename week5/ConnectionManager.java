@@ -1,23 +1,22 @@
 package week5;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  * Created by Pavel
  */
-public class ConnectionToDatabase
+public class ConnectionManager
 {
 
-
-    public static void init(String driver) throws ClassNotFoundException {
+    public static void init(String driver) throws ClassNotFoundException
+    {
         Class.forName(driver);
     }
 
     public static Connection getConnection(String url, String login, String pass) throws ClassNotFoundException, SQLException
     {
-
         return DriverManager.getConnection(url, login, pass);
     }
 }

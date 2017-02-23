@@ -1,5 +1,7 @@
 package week5;
 
+import week5.utills.Database;
+
 import java.sql.*;
 import java.util.Set;
 
@@ -11,11 +13,6 @@ public class Main
 
     static Set<Car> cars;
     static Set<Engine> engines;
-
-    private static int randomInt(int min, int max)
-    {
-        return (int) (Math.random() * (++max - min)) + min;
-    }
 
     public static void main(String[] args)
     {
@@ -32,19 +29,16 @@ public class Main
 
         try
         {
-            ConnectionToDatabase.init(driver);
+            ConnectionManager.init(driver);
         }
         catch (ClassNotFoundException e)
         {
             e.printStackTrace();
         }
 
-        try (Connection conn = ConnectionToDatabase.getConnection(url, login, pass))
+        try (Connection conn = ConnectionManager.getConnection(url, login, pass))
         {
-            cars = rff.parsAndCreateCar();
-            engines = rff.parsAndCreateEngine();
-            int[] resultCar = fd.addCars(conn, cars);
-            int[] resultEngine = fd.addEngines(conn, engines);
+            Database database= new Database(conn);
 
 
         }
