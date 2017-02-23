@@ -25,12 +25,10 @@ public class Main
         String pass = "postgres";
         //String sqlCar = "INSERT INTO car (year, make, model, price, id_engine) VALUES (1909, 'Ford', 'Model T', 100000, 1);";
         //String sqlEngine = "INSERT INTO engine (displacement, power) VALUES (1000, 60);";
-        String sqlCar = "INSERT INTO car (year, make, model, price, id_engine) VALUES (?, ?, ?, ?, ?);";
-        String sqlEngine = "INSERT INTO engine (displacement, power) VALUES (?, ?);";
 
         ReadFromFile rff = new ReadFromFile();
-        //cars = rff.parsAndCreateCar();
-        engines = rff.parsAndCreateEngine();
+        FillDatabase fd = new FillDatabase();
+
 
         try
         {
@@ -41,33 +39,13 @@ public class Main
             e.printStackTrace();
         }
 
-        try (Connection conn = ConnectionToDatabase.getConnection(url, login, pass);
-             PreparedStatement pst = conn.prepareStatement(sqlEngine))
+        try (Connection conn = ConnectionToDatabase.getConnection(url, login, pass))
         {
+            cars = rff.parsAndCreateCar();
+            engines = rff.parsAndCreateEngine();
+            int[] resultCar = fd.addCars(conn, cars);
+            int[] resultEngine = fd.addEngines(conn, engines);
 
-//            conn.setAutoCommit(false);
-//            for (Engine engine : engines)
-//            {
-//                pst.setDouble(1, engine.getDisplacement());
-//                pst.setDouble(2, engine.getPower());
-//                pst.addBatch();
-//            }
-//            int[] result = pst.executeBatch();
-//            conn.commit();
-//            System.out.println(result.toString());
-
-//            conn.setAutoCommit(false);
-//            for (Car car : cars)
-//            {
-//                pst.setInt(1, car.getYear());
-//                pst.setString(2, car.getMake());
-//                pst.setString(3, car.getModel());
-//                pst.setDouble(4, car.getPrice());
-//                pst.setInt(5, car.getId_engine());
-//                pst.addBatch();
-//            }
-//            int[] result = pst.executeBatch();
-//            conn.commit();
 
         }
         catch (ClassNotFoundException | SQLException e)
