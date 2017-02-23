@@ -23,14 +23,7 @@ public class Car
         this.year = year;
     }
 
-    public Car(int year, String make, String model, double price, int id_engine)
-    {
-        this.model = model;
-        this.make = make;
-        this.id_engine = id_engine;
-        this.price = price;
-        this.year = year;
-    }
+    public Car()   {   }
 
     public int getId()
     {
@@ -100,5 +93,18 @@ public class Car
     public void setEngine(Engine engine)
     {
         this.engine = engine;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "Car{" +
+                "id=" + id +
+                ", year=" + year +
+                ", make='" + make + '\'' +
+                ", model='" + model + '\'' +
+                ", price=" + price +
+                ", engine=" + engine +
+                '}';
     }
 }

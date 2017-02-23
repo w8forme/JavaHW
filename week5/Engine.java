@@ -12,11 +12,16 @@ public class Engine
     private double power;               //Engine power (60-280 hp)
     private Set<Car> installedInCars;   //Set of cars that has the current engine
 
-    public Engine(double displacement, double power)
+
+    public Engine(int id, double displacement, double power, Set<Car> installedInCars)
     {
+        this.id = id;
         this.displacement = displacement;
         this.power = power;
+        this.installedInCars = installedInCars;
     }
+
+    public Engine()    {    }
 
     public int getId()
     {
@@ -56,5 +61,15 @@ public class Engine
     public void setInstalledInCars(Set<Car> installedInCars)
     {
         this.installedInCars = installedInCars;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "Engine{" +
+                "id=" + id +
+                ", displacement=" + displacement +
+                ", power=" + power +
+                '}';
     }
 }
