@@ -1,4 +1,6 @@
-package week5;
+package week5.utills;
+
+import week5.utills.Car;
 
 import java.util.Set;
 
@@ -13,6 +15,7 @@ public class Engine
     private Set<Car> installedInCars;   //Set of cars that has the current engine
 
 
+    //Constructor for receiving engines form database
     public Engine(int id, double displacement, double power, Set<Car> installedInCars)
     {
         this.id = id;
@@ -20,8 +23,14 @@ public class Engine
         this.power = power;
         this.installedInCars = installedInCars;
     }
+    //Constructor for adding engines into database
+    public Engine(double displacement, double power)
+    {
+        this.displacement = displacement;
+        this.power = power;
+    }
 
-    public Engine()    {    }
+    public Engine(){}
 
     public int getId()
     {

@@ -1,4 +1,4 @@
-package week5;
+package week5.utills;
 
 /**
  * Created by Pavel
@@ -12,7 +12,7 @@ public class Car
     private double price;       //The price of the car
     private Engine engine;      //Engine installed into the car
     private int id_engine;      //Field for adding cars into database
-
+//Constructor for receiving cars form database
     public Car(int id, int year, String make, String model, double price, Engine engine)
     {
         this.id = id;
@@ -21,6 +21,15 @@ public class Car
         this.engine = engine;
         this.price = price;
         this.year = year;
+    }
+//Constructor for adding cars into database
+    public Car(int year, String make, String model, double price, int id_engine)
+    {
+        this.year = year;
+        this.make = make;
+        this.model = model;
+        this.price = price;
+        this.id_engine = id_engine;
     }
 
     public Car()   {   }

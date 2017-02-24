@@ -1,6 +1,6 @@
 package week5;
 
-import week5.utills.UserDao;
+import week5.utills.*;
 
 import java.sql.*;
 import java.util.Set;
@@ -18,33 +18,33 @@ public class Main
         String login = "postgres";
         String pass = "postgres";
         Set<Car> cars;
-
         try
         {
-            ConnectionManager.init(driver);
+            JdbcUtils.init(driver);
         }
         catch (ClassNotFoundException e)
         {
             e.printStackTrace();
         }
-
-        try (Connection conn = ConnectionManager.getConnection(url, login, pass))
+        try (Connection conn = JdbcUtils.getConnection(url, login, pass))
         {
-            UserDao database= new UserDao(conn);
-            System.out.println(database.getCarById(25).toString());
-            System.out.println(database.getEngineById(69).toString());
-            Engine engine = database.getEngineById(32);
-            cars = engine.getInstalledInCars();
-            for (Car car :
-                    cars)
+            CarDao carDao= new CarDaoJdbc(conn);
+            EngineDao engineDao = new EngineDaoJdbc(conn);
+            Engine engine = new Engine(2100, 150);
+            Car car = new Car(2016, "Audi", "Audi R8", 164000, 72);
+            //carDao.insertCar(car);
+            //engineDao.insertEngine(engine);
+            System.out.println(carDao.getCarById(7270).toString());
+            System.out.println(engineDao.getEngineById(72).toString());
+            cars = engineDao.getEngineById(72).getInstalledInCars();
+            for (Car car2: cars)
             {
-                System.out.println(car);
+                System.out.println(car2);
             }
         }
         catch (ClassNotFoundException | SQLException e)
         {
             e.printStackTrace();
         }
-
     }
 }
