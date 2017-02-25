@@ -32,7 +32,7 @@ public class EngineDaoImpl implements EngineDao
         this.conn = conn;
     }
 
-    private Engine engineBuilder(ResultSet rs) throws SQLException
+    private Engine buildEngine(ResultSet rs) throws SQLException
     {
         Engine engine = new Engine();
         rs.next();
@@ -56,7 +56,7 @@ public class EngineDaoImpl implements EngineDao
         {
             pst.setInt(1, id);
             rs = pst.executeQuery();
-            engine = engineBuilder(rs);
+            engine = buildEngine(rs);
         } catch (SQLException e)
         {
             e.printStackTrace();

@@ -30,7 +30,7 @@ public class CarDaoImpl implements CarDao
         this.conn = conn;
     }
 
-    private Car carBuilder(ResultSet rs) throws SQLException
+    private Car buildCar(ResultSet rs) throws SQLException
     {
 
         Engine engine = new Engine();
@@ -70,7 +70,7 @@ public class CarDaoImpl implements CarDao
         {
             pst.setInt(1, id);
             rs = pst.executeQuery();
-            car = carBuilder(rs);
+            car = buildCar(rs);
         } catch (SQLException e)
         {
             e.printStackTrace();

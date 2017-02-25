@@ -24,6 +24,7 @@ public class Main
         String login = "postgres";
         String pass = "postgres";
         Set<Car> cars;
+
         try
         {
             JdbcUtils.init(driver);
