@@ -1,5 +1,11 @@
-package week5;
+package week5.main;
 
+import week5.DAO.CarDao;
+import week5.DAO.EngineDao;
+import week5.DAOImpl.CarDaoImpl;
+import week5.DAOImpl.EngineDaoImpl;
+import week5.Entities.Car;
+import week5.Entities.Engine;
 import week5.utills.*;
 
 import java.sql.*;
@@ -28,19 +34,19 @@ public class Main
         }
         try (Connection conn = JdbcUtils.getConnection(url, login, pass))
         {
-            CarDao carDao= new CarDaoJdbc(conn);
-            EngineDao engineDao = new EngineDaoJdbc(conn);
+            CarDao carDao= new CarDaoImpl(conn);
+            EngineDao engineDao = new EngineDaoImpl(conn);
             Engine engine = new Engine(2100, 150);
             Car car = new Car(2016, "Audi", "Audi R8", 164000, 72);
             //carDao.insertCar(car);
             //engineDao.insertEngine(engine);
             System.out.println(carDao.getCarById(7272).toString());
-            System.out.println(engineDao.getEngineById(299).toString());
-//            cars = engineDao.getEngineById(72).getInstalledInCars();
-//            for (Car car2: cars)
-//            {
-//                System.out.println(car2);
-//            }
+            System.out.println(engineDao.getEngineById(307).toString());
+            cars = engineDao.getEngineById(307).getInstalledInCars();
+            for (Car car2: cars)
+            {
+                System.out.println(car2);
+            }
         }
         catch (ClassNotFoundException | SQLException e)
         {

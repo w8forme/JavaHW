@@ -1,4 +1,6 @@
-package week5.utills;
+package week5.DAO;
+
+import week5.Entities.Car;
 
 import java.sql.SQLException;
 

@@ -1,16 +1,19 @@
-package week5.utills;
+package week5.DAOImpl;
+
+import week5.DAO.CarDao;
+import week5.Entities.Car;
+import week5.Entities.Engine;
+import week5.utills.JdbcUtils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Created by Pavel
  */
-public class EngineDaoJdbc implements EngineDao
+public class CarDaoImpl implements CarDao
 {
     private Connection conn;
     private int carId;
@@ -22,77 +25,74 @@ public class EngineDaoJdbc implements EngineDao
     private double displacement;        //Displacement of specific engine (1000 - 3000 cc)
     private double power;               //Engine power (60-280 hp)
 
-    public EngineDaoJdbc(Connection conn)
+    public CarDaoImpl(Connection conn)
     {
         this.conn = conn;
     }
 
-    private Engine engineBuilder(ResultSet rs) throws SQLException
+    private Car carBuilder(ResultSet rs) throws SQLException
     {
-        Set<Car> installedInCars = new HashSet<Car>();   //Set of cars that has the current engine
+
         Engine engine = new Engine();
         Car car = null;
         while (rs.next())
         {
-            carId = rs.getInt("car_id");
+            carId = rs.getInt("id");
             year = rs.getInt("year");
             make = rs.getString("make");
             model = rs.getString("model");
             price = rs.getDouble("price");
-            engineId = rs.getInt("engine_id");
+            engineId = rs.getInt("id_engine");
             displacement = rs.getDouble("displacement");
             power = rs.getDouble("power");
             engine.setId(engineId);
             engine.setDisplacement(displacement);
             engine.setPower(power);
-            engine.setInstalledInCars(installedInCars);
-            engine.getInstalledInCars().add(new Car(carId, year, make, model, price, engineId, engine));
+            car = new Car(carId, year, make, model, price, engineId, engine);
         }
-        return engine;
+        return car;
     }
 
     @Override
-    public Engine getEngineById(int id)
+    public Car getCarById(int id)
     {
         ResultSet rs = null;
-        Engine engine = null;
-        String sqlEngine = "SELECT\n" +
-                "  e.id AS engine_id,\n" +
+        Car car = null;
+        String sqlCar = "SELECT\n" +
+                "  c.*,\n" +
                 "  e.displacement,\n" +
-                "  e.power,\n" +
-                "  c.id AS car_id,\n" +
-                "  c.model,\n" +
-                "  c.price,\n" +
-                "  c.make,\n" +
-                "  c.year\n" +
-                "FROM engine e\n" +
-                "  JOIN car c ON e.id = c.id_engine\n" +
-                "WHERE e.id = ?;";
-        try (PreparedStatement pst = conn.prepareStatement(sqlEngine))
+                "  e.power\n" +
+                "FROM car c\n" +
+                "  JOIN engine e ON c.id_engine = e.id\n" +
+                "WHERE c.id = ?;";
+
+        try (PreparedStatement pst = conn.prepareStatement(sqlCar))
         {
             pst.setInt(1, id);
             rs = pst.executeQuery();
-            engine = engineBuilder(rs);
+            car = carBuilder(rs);
         } catch (SQLException e)
         {
             e.printStackTrace();
-        } finally
+        }
+        finally
         {
             JdbcUtils.closeQuietly(rs);
         }
-        return engine;
+        return car;
     }
-
     @Override
-    public void insertEngine(Engine engine)
+    public void insertCar(Car car)
     {
-        String sqlEngine = "INSERT INTO engine (displacement, power) VALUES (?, ?);";
-        try (PreparedStatement pst = conn.prepareStatement(sqlEngine))
+        String sqlCar = "INSERT INTO car (year, make, model, price, id_engine) VALUES (?, ?, ?, ?, ?);";
+        try (PreparedStatement pst = conn.prepareStatement(sqlCar))
         {
-            pst.setDouble(1, engine.getDisplacement());
-            pst.setDouble(2, engine.getPower());
+            pst.setInt(1, car.getYear());
+            pst.setString(2, car.getMake());
+            pst.setString(3, car.getModel());
+            pst.setDouble(4, car.getPrice());
+            pst.setInt(5, car.getId_engine());
             pst.executeUpdate();
-
         } catch (SQLException e)
         {
             e.printStackTrace();

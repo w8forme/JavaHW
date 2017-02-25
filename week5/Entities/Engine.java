@@ -1,6 +1,4 @@
-package week5.utills;
-
-import week5.utills.Car;
+package week5.Entities;
 
 import java.util.Set;
 

@@ -3,7 +3,13 @@ package week5.test;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import week5.utills.*;
+import week5.DAO.CarDao;
+import week5.DAO.EngineDao;
+import week5.DAOImpl.CarDaoImpl;
+import week5.DAOImpl.EngineDaoImpl;
+import week5.Entities.Car;
+import week5.Entities.Engine;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -31,8 +37,8 @@ public class UserDaoTest
         String pass = "postgres";
         Class.forName(driver);
         conn = DriverManager.getConnection(url, login, pass);
-        carDao = new CarDaoJdbc(conn);
-        engineDao = new EngineDaoJdbc(conn);
+        carDao = new CarDaoImpl(conn);
+        engineDao = new EngineDaoImpl(conn);
         engine = new Engine(2100, 150);
         car = new Car(2016, "Audi", "Audi R8", 164000, 72);
     }
@@ -72,7 +78,6 @@ public class UserDaoTest
         assertEquals(car.getId_engine(), testCar.getId_engine());
         assertEquals(car.getYear(), testCar.getYear());
         assertEquals(car.getPrice(), testCar.getPrice(), 0.0);
-
     }
 
     @Test
