@@ -1,0 +1,7 @@
+Software requirements:
+1.Maven
+2.Postgresql
+
+How To:
+Init DB by creating propriate database and needed tables.
+All commands and instruction can be found at "cars_catalog".
