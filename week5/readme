@@ -1,3 +1,21 @@
+Task
+Создаем две таблицы в базе данных:
+1)	сar - id  PK , model, make, id_engine, price
+2)	engine - id  PK, displacement , power, 
+
+Создать два класса, которые будут соответствовать таблицам :
+1)	Car(с полями id  , model, make, price, Engine), 
+2)	Engine (с полями id  , displacement , power, Set<Car>), 
+
+Используя JDBC реализовать сервис который будет иметь такие методы:
+	- Car getCarById(int id)
+	- Engine getEngineById(int id)
+	- insertCar(Car car)
+	- insertEngine(Engine engine)
+
+Протестировать данные методы (JUnit 4).
+=============================================================================
+
 Software requirements:
 1.Maven
 2.Postgresql
