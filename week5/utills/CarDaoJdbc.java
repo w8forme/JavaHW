@@ -45,7 +45,7 @@ public class CarDaoJdbc implements CarDao
             engine.setId(engineId);
             engine.setDisplacement(displacement);
             engine.setPower(power);
-            car = new Car(carId, year, make, model, price, engine);
+            car = new Car(carId, year, make, model, price, engineId, engine);
         }
         return car;
     }

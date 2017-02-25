@@ -13,7 +13,7 @@ public class Car
     private Engine engine;      //Engine installed into the car
     private int id_engine;      //Field for adding cars into database
 //Constructor for receiving cars form database
-    public Car(int id, int year, String make, String model, double price, Engine engine)
+    public Car(int id, int year, String make, String model, double price, int id_engine, Engine engine)
     {
         this.id = id;
         this.model = model;
@@ -21,6 +21,7 @@ public class Car
         this.engine = engine;
         this.price = price;
         this.year = year;
+        this.id_engine = id_engine;
     }
 //Constructor for adding cars into database
     public Car(int year, String make, String model, double price, int id_engine)

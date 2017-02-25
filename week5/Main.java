@@ -34,13 +34,13 @@ public class Main
             Car car = new Car(2016, "Audi", "Audi R8", 164000, 72);
             //carDao.insertCar(car);
             //engineDao.insertEngine(engine);
-            System.out.println(carDao.getCarById(7270).toString());
-            System.out.println(engineDao.getEngineById(72).toString());
-            cars = engineDao.getEngineById(72).getInstalledInCars();
-            for (Car car2: cars)
-            {
-                System.out.println(car2);
-            }
+            System.out.println(carDao.getCarById(7272).toString());
+            System.out.println(engineDao.getEngineById(299).toString());
+//            cars = engineDao.getEngineById(72).getInstalledInCars();
+//            for (Car car2: cars)
+//            {
+//                System.out.println(car2);
+//            }
         }
         catch (ClassNotFoundException | SQLException e)
         {

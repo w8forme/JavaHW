@@ -32,7 +32,6 @@ public class EngineDaoJdbc implements EngineDao
         Set<Car> installedInCars = new HashSet<Car>();   //Set of cars that has the current engine
         Engine engine = new Engine();
         Car car = null;
-
         while (rs.next())
         {
             carId = rs.getInt("car_id");
@@ -47,10 +46,11 @@ public class EngineDaoJdbc implements EngineDao
             engine.setDisplacement(displacement);
             engine.setPower(power);
             engine.setInstalledInCars(installedInCars);
-            engine.getInstalledInCars().add(new Car(carId, year, make, model, price, engine));
+            engine.getInstalledInCars().add(new Car(carId, year, make, model, price, engineId, engine));
         }
         return engine;
     }
+
     @Override
     public Engine getEngineById(int id)
     {
@@ -76,13 +76,13 @@ public class EngineDaoJdbc implements EngineDao
         } catch (SQLException e)
         {
             e.printStackTrace();
-        }
-        finally
+        } finally
         {
             JdbcUtils.closeQuietly(rs);
         }
         return engine;
     }
+
     @Override
     public void insertEngine(Engine engine)
     {

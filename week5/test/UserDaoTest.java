@@ -1,11 +1,13 @@
 package week5.test;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import week5.utills.*;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import static org.junit.Assert.*;
 
@@ -50,16 +52,51 @@ public class UserDaoTest
     @Test
     public void insertCar() throws Exception
     {
+        String sql = "SELECT * FROM car WHERE make = ? AND model = ? AND year = ? AND id_engine = ? AND price = ?;";
+        int carId = -1;
         carDao.insertCar(car);
-        assertNotEquals(car, carDao.getCarById(20));
-        assertNotNull(carDao.getCarById(20));
+        PreparedStatement pst = conn.prepareStatement(sql);
+        pst.setString(1, "Audi");
+        pst.setString(2, "Audi R8");
+        pst.setInt(3, 2016);
+        pst.setInt(4, 72);
+        pst.setDouble(5, 164000);
+        ResultSet rs = pst.executeQuery();
+        while (rs.next())
+        {
+            carId = rs.getInt("id");
+        }
+        Car testCar = carDao.getCarById(carId);
+        assertEquals(car.getModel(), testCar.getModel());
+        assertEquals(car.getMake(), testCar.getMake());
+        assertEquals(car.getId_engine(), testCar.getId_engine());
+        assertEquals(car.getYear(), testCar.getYear());
+        assertEquals(car.getPrice(), testCar.getPrice(), 0.0);
 
     }
 
     @Test
     public void insertEngine() throws Exception
     {
-
+        String sql = "SELECT * FROM engine WHERE displacement = ? AND power = ?;";
+        int engineId = -1;
+        engineDao.insertEngine(engine);
+        PreparedStatement pst = conn.prepareStatement(sql);
+        pst.setDouble(1, 2100);
+        pst.setDouble(2, 150);
+        ResultSet rs = pst.executeQuery();
+        while (rs.next())
+        {
+            engineId = rs.getInt("id");
+        }
+        Engine testEngine = engineDao.getEngineById(engineId);
+        assertEquals(engine.getDisplacement(), testEngine.getDisplacement(), 0.0);
+        assertEquals(engine.getPower(), testEngine.getPower(), 0.0);
     }
 
+    @After
+    public void tearDown() throws Exception
+    {
+        conn.close();
+    }
 }
