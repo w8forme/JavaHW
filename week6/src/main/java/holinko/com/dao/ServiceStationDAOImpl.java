@@ -1,8 +1,9 @@
 package holinko.com.dao;
 
-import holinko.com.model.Car;
+import holinko.com.model.ServiceStation;
 import holinko.com.utils.HibernateUtil;
 import org.hibernate.Session;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,17 +11,17 @@ import java.util.List;
 /**
  * Created by Pavel
  */
-public class CarDAOImpl implements CarDAO
+public class ServiceStationDAOImpl implements ServiceStationDAO
 {
     @Override
-    public void addCar(Car car) throws SQLException
+    public void addServiceStation(ServiceStation serviceStation) throws SQLException
     {
         Session session = null;
         try
         {
             session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
-            session.save(car);
+            session.save(serviceStation);
             session.getTransaction().commit();
         } catch (Exception e)
         {
@@ -35,15 +36,15 @@ public class CarDAOImpl implements CarDAO
     }
 
     @Override
-    public void updateCar(Car car, Long car_id) throws SQLException
+    public void updateServiceStation(ServiceStation serviceStation, Long serviceStation_id) throws SQLException
     {
         Session session = null;
         try
         {
-            car.setId(car_id);
+            serviceStation.setId(serviceStation_id);
             session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
-            session.update(car);
+            session.update(serviceStation);
             session.getTransaction().commit();
         } catch (Exception e)
         {
@@ -58,14 +59,14 @@ public class CarDAOImpl implements CarDAO
     }
 
     @Override
-    public void deleteCar(Car car) throws SQLException
+    public void deleteServiceStation(ServiceStation serviceStation) throws SQLException
     {
         Session session = null;
         try
         {
             session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
-            session.delete(car);
+            session.delete(serviceStation);
             session.getTransaction().commit();
         } catch (Exception e)
         {
@@ -80,13 +81,13 @@ public class CarDAOImpl implements CarDAO
     }
 
     @Override
-    public Car getCarById(Long car_id) throws SQLException
+    public ServiceStation getServiceStationById(Long serviceStation_id) throws SQLException
     {
         Session session = null;
-        Car car = null;
+        ServiceStation serviceStation = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
-            car = session.get(Car.class, car_id);
+            serviceStation = session.get(ServiceStation.class, serviceStation_id);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -94,17 +95,17 @@ public class CarDAOImpl implements CarDAO
                 session.close();
             }
         }
-        return car;
+        return serviceStation;
     }
 
     @Override
-    public List<Car> getAllCars() throws SQLException
+    public List<ServiceStation> getAllServiceStations() throws SQLException
     {
         Session session = null;
-        List<Car> cars = new ArrayList<Car>();
+        List<ServiceStation> serviceStations = new ArrayList<ServiceStation>();
         try {
             session = HibernateUtil.getSessionFactory().openSession();
-            cars = session.createCriteria(Car.class).list();
+            serviceStations = session.createCriteria(ServiceStation.class).list();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -112,6 +113,6 @@ public class CarDAOImpl implements CarDAO
                 session.close();
             }
         }
-        return cars;
+        return serviceStations;
     }
 }

@@ -3,7 +3,7 @@ package holinko.com.dao;
 import holinko.com.model.Car;
 
 import java.sql.SQLException;
-import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by Pavel
@@ -11,8 +11,8 @@ import java.util.Collection;
 public interface CarDAO
 {
     void addCar(Car car) throws SQLException;
-    void updateCar(Car car) throws SQLException;
+    void updateCar(Car car, Long car_id) throws SQLException;
     void deleteCar(Car car) throws SQLException;
     Car getCarById(Long car_id) throws SQLException;
-    Collection getAllCars() throws SQLException;
+    List<Car> getAllCars() throws SQLException;
 }

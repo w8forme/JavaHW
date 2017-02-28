@@ -1,9 +1,7 @@
 package holinko.com.dao;
 
 import holinko.com.model.Mechanic;
-
 import java.sql.SQLException;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -12,7 +10,8 @@ import java.util.List;
 public interface MechanicDAO
 {
     void addMechanic(Mechanic mechanic) throws SQLException;
-    void updateMechanic(Mechanic mechanic) throws SQLException;
+    void updateMechanic(Mechanic mechanic, Long mechanic_id) throws SQLException;
+    void deleteMechanic(Mechanic mechanic) throws SQLException;
     Mechanic getMechanicById(Long mechanic_id) throws SQLException;
-    Collection getAllMechanics() throws SQLException;
+    List<Mechanic> getAllMechanics() throws SQLException;
 }
