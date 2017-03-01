@@ -22,15 +22,15 @@ public class Main
     {
         try
         {
-            //get all cars
+            //get all cars +
 //            List<Car> cars = carDAO.getAllCars();
 //            for (int i = 0; i < cars.size(); i++) {
 //                System.out.println(cars.get(i));
 //            }
 
-            //get car by id
-//            Car car = carDAO.getCarById(15L);
-//            System.out.println(car);
+            //get car by id +
+            Car car = carDAO.getCarById(497L);
+            System.out.println(car);
 //            Set<ServiceStation> stations = car.getServiceStationSet();
 //            System.out.println(stations);
 //            for (ServiceStation s: stations)
@@ -38,20 +38,20 @@ public class Main
 //                System.out.println(s.getCarSet());
 //            }
 
-            //add car
+            //add car +
 //            Car car = new Car("Honda", "Honda Clarity", 20, new BigDecimal(30000), "2010");
 //            ServiceStation gogolStr = new ServiceStation("Гоголя 27");
 //            car.getServiceStationSet().add(gogolStr);
 //            carDAO.addCar(car);
 
-            //update
+            //update +
 //            Car car = new Car("Honda", "Honda Clarity", 25, new BigDecimal(80000), "2016");
 //            carDAO.updateCar(car, 495L);
 
-            //delete
-            Car car = new Car("Honda", "Honda Clarity", 25, new BigDecimal(80000), "2016");
-            car.setId(496L);
-            carDAO.deleteCar(car);
+            //delete +
+//            Car car = new Car();
+//            car.setId(498L);
+//            carDAO.deleteCar(car);
 
         } catch (SQLException e)
         {

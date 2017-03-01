@@ -3,6 +3,10 @@ package holinko.com.dao;
 import holinko.com.model.Car;
 import holinko.com.utils.HibernateUtil;
 import org.hibernate.Session;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -69,6 +73,7 @@ public class CarDAOImpl implements CarDAO
             session.getTransaction().commit();
         } catch (Exception e)
         {
+            System.err.println("Delete error!");
             e.printStackTrace();
         } finally
         {
@@ -84,13 +89,17 @@ public class CarDAOImpl implements CarDAO
     {
         Session session = null;
         Car car = null;
-        try {
+        try
+        {
             session = HibernateUtil.getSessionFactory().openSession();
             car = session.get(Car.class, car_id);
-        } catch (Exception e) {
+        } catch (Exception e)
+        {
             e.printStackTrace();
-        } finally {
-            if (session != null && session.isOpen()) {
+        } finally
+        {
+            if (session != null && session.isOpen())
+            {
                 session.close();
             }
         }
@@ -102,13 +111,21 @@ public class CarDAOImpl implements CarDAO
     {
         Session session = null;
         List<Car> cars = new ArrayList<Car>();
-        try {
+        try
+        {
             session = HibernateUtil.getSessionFactory().openSession();
-            cars = session.createCriteria(Car.class).list();
-        } catch (Exception e) {
+            CriteriaBuilder builder = session.getCriteriaBuilder();
+            CriteriaQuery<Car> criteria = builder.createQuery(Car.class);
+            Root<Car> from = criteria.from(Car.class);
+            criteria.select(from);
+            cars = session.createQuery(criteria).getResultList();
+        } catch (Exception e)
+        {
             e.printStackTrace();
-        } finally {
-            if (session != null && session.isOpen()) {
+        } finally
+        {
+            if (session != null && session.isOpen())
+            {
                 session.close();
             }
         }

@@ -4,6 +4,9 @@ import holinko.com.model.Mechanic;
 import holinko.com.utils.HibernateUtil;
 import org.hibernate.Session;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -75,6 +78,7 @@ public class MechanicDAOImpl implements MechanicDAO
         {
             if (session != null && session.isOpen())
             {
+                System.err.println("Delete error!");
                 session.close();
             }
         }
@@ -105,7 +109,11 @@ public class MechanicDAOImpl implements MechanicDAO
         List<Mechanic> mechanics = new ArrayList<Mechanic>();
         try {
             session = HibernateUtil.getSessionFactory().openSession();
-            mechanics = session.createCriteria(Mechanic.class).list();
+            CriteriaBuilder builder = session.getCriteriaBuilder();
+            CriteriaQuery<Mechanic> criteria = builder.createQuery(Mechanic.class);
+            Root<Mechanic> from = criteria.from(Mechanic.class);
+            criteria.select(from);
+            mechanics = session.createQuery(criteria).getResultList();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
