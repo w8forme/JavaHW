@@ -1,0 +1,26 @@
+Создаем три таблицы в базе данных(Автомобиль, Механик, СТО):
+1)	сar - id  PK , model, make, id_engine, price, date(дата производства)
+2)	mechanic - id  PK, name , surname
+3)	service_stations -  id  PK, address.
+Отношение многие ко многим между таблицами Автомобиль – СТО
+Отношение один ко многим между таблицами СТО – Механик
+
+
+Используя Hibernate(используем аннотации) реализовать сервисы для каждой сущности которые будут иметь такие методы:
+	- add
+	- update
+	- getById
+	- delete
+
+Протестировать данные методы (JUnit 4).
+=================================================================================================================
+
+Software requirements:
+1.Maven
+2.Postgresql
+3.Hibernate
+4.JUnit4 4
+
+How To:
+Init DB by creating propriate database and needed tables.
+All commands and instruction can be found at "cars_catalog.backup".
