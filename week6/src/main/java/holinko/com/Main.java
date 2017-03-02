@@ -2,7 +2,10 @@ package holinko.com;
 
 import holinko.com.dao.CarDAO;
 import holinko.com.dao.CarDAOImpl;
+import holinko.com.dao.MechanicDAO;
+import holinko.com.dao.MechanicDAOImpl;
 import holinko.com.model.Car;
+import holinko.com.model.Mechanic;
 import holinko.com.model.ServiceStation;
 
 import java.math.BigDecimal;
@@ -52,6 +55,7 @@ public class Main
 //            Car car = new Car();
 //            car.setId(498L);
 //            carDAO.deleteCar(car);
+
 
         } catch (SQLException e)
         {

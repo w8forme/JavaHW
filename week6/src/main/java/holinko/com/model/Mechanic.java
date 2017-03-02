@@ -16,7 +16,7 @@ public class Mechanic
     private String name;
     @Column(name = "surname")
     private String surname;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "service_station_id")
     private ServiceStation serviceStation;
 
