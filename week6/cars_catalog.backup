@@ -1,0 +1,886 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.6.2
+-- Dumped by pg_dump version 9.6.2
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: car; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE car (
+    id integer NOT NULL,
+    make text,
+    model text,
+    id_engine integer,
+    price numeric,
+    date text
+);
+
+
+ALTER TABLE car OWNER TO postgres;
+
+--
+-- Name: car_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE car_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE car_id_seq OWNER TO postgres;
+
+--
+-- Name: car_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE car_id_seq OWNED BY car.id;
+
+
+--
+-- Name: car_service_station; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE car_service_station (
+    id integer NOT NULL,
+    car_id integer,
+    service_station_id integer
+);
+
+
+ALTER TABLE car_service_station OWNER TO postgres;
+
+--
+-- Name: car_service_station_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE car_service_station_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE car_service_station_id_seq OWNER TO postgres;
+
+--
+-- Name: car_service_station_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE car_service_station_id_seq OWNED BY car_service_station.id;
+
+
+--
+-- Name: mechanic; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE mechanic (
+    id integer NOT NULL,
+    name text,
+    surname text,
+    service_station_id integer
+);
+
+
+ALTER TABLE mechanic OWNER TO postgres;
+
+--
+-- Name: mechanic_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE mechanic_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE mechanic_id_seq OWNER TO postgres;
+
+--
+-- Name: mechanic_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE mechanic_id_seq OWNED BY mechanic.id;
+
+
+--
+-- Name: service_stations; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE service_stations (
+    id integer NOT NULL,
+    address text
+);
+
+
+ALTER TABLE service_stations OWNER TO postgres;
+
+--
+-- Name: service_stations _id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE "service_stations _id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE "service_stations _id_seq" OWNER TO postgres;
+
+--
+-- Name: service_stations _id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE "service_stations _id_seq" OWNED BY service_stations.id;
+
+
+--
+-- Name: car id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY car ALTER COLUMN id SET DEFAULT nextval('car_id_seq'::regclass);
+
+
+--
+-- Name: car_service_station id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY car_service_station ALTER COLUMN id SET DEFAULT nextval('car_service_station_id_seq'::regclass);
+
+
+--
+-- Name: mechanic id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY mechanic ALTER COLUMN id SET DEFAULT nextval('mechanic_id_seq'::regclass);
+
+
+--
+-- Name: service_stations id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY service_stations ALTER COLUMN id SET DEFAULT nextval('"service_stations _id_seq"'::regclass);
+
+
+--
+-- Data for Name: car; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY car (id, make, model, id_engine, price, date) FROM stdin;
+1	Infiniti	FX	290	128426	2011
+2	Infiniti	M	294	38404	2011
+3	Infiniti	IPL G	152	46314	2011
+4	Infiniti	G	271	29447	2011
+5	Infiniti	QX	121	56220	2011
+6	Subaru	Legacy	75	95345	2011
+7	Subaru	Impreza WRX	171	129085	2011
+8	Subaru	Impreza	89	95378	2011
+9	Subaru	Outback	234	39386	2011
+10	Subaru	Tribeca	187	25726	2011
+11	Subaru	Forester	54	77148	2011
+12	Saab	9-3	186	87918	2011
+13	Saab	9-5	245	133701	2011
+14	Saab	9-4X	55	49568	2011
+15	Porsche	911	142	106190	2011
+16	Porsche	Cayenne	40	51195	2011
+17	Porsche	Panamera	170	79351	2011
+18	Porsche	Boxster	151	66008	2011
+19	Porsche	Cayman	235	123594	2011
+20	Land Rover	Freelander	25	146273	2011
+21	Land Rover	Range Rover Sport	114	68933	2011
+22	Land Rover	Range Rover	208	94414	2011
+23	Land Rover	Discovery	197	65740	2011
+24	Land Rover	LR2	140	127315	2011
+25	Land Rover	LR4	190	26449	2011
+26	Buick	LaCrosse	17	122945	2011
+27	Buick	Regal	247	100957	2011
+28	Buick	Lucerne	108	122756	2011
+29	Buick	Enclave	14	101198	2011
+30	Scion	tC	15	136034	2011
+31	Scion	xB	136	143719	2011
+32	Scion	xD	184	52285	2011
+33	Lotus	Elise	149	39530	2011
+34	Lotus	Evora	199	49818	2011
+35	Lotus	Exige	262	147402	2011
+36	Kia	Optima	275	136983	2011
+37	Kia	Forte	22	54339	2011
+38	Kia	Rio	130	82455	2011
+39	Kia	Sedona	286	37454	2011
+40	Kia	Sorento	233	31728	2011
+41	Kia	Sportage	159	96816	2011
+42	Kia	Soul	160	44486	2011
+43	Hyundai	Elantra	131	144172	2011
+44	Hyundai	Sonata	265	56147	2011
+45	Hyundai	Genesis	103	147554	2011
+46	Hyundai	Santa Fe	106	122915	2011
+47	Hyundai	Tucson	237	104471	2011
+48	Hyundai	Equus	220	122758	2011
+49	Hyundai	Veracruz	120	94377	2011
+50	Hyundai	Accent	286	91517	2011
+51	Hyundai	Azera	201	75004	2011
+52	Hyundai	Genesis Coupe	42	28767	2011
+53	Suzuki	Grand Vitara	213	72416	2011
+54	Suzuki	SX4	192	89054	2011
+55	Suzuki	Kizashi	188	114754	2011
+56	Suzuki	Equator	131	60974	2011
+57	Smart	Fortwo	171	147898	2011
+58	Volvo	C30	190	116507	2011
+59	Volvo	V50	143	93858	2011
+60	Volvo	XC90	235	131652	2011
+61	Volvo	S60	107	120876	2011
+62	Volvo	XC60	141	94248	2011
+63	Volvo	XC70	196	66824	2011
+64	Volvo	C70	268	86933	2011
+65	Volvo	S80	155	23707	2011
+66	Volvo	S40	113	140124	2011
+67	Rolls-Royce	Phantom	296	112533	2011
+68	Rolls-Royce	Ghost	12	148229	2011
+69	Lincoln	Navigator	87	121450	2011
+70	Lincoln	MKT	73	129865	2011
+71	Lincoln	MKS	160	100442	2011
+72	Lincoln	MKZ	252	101509	2011
+73	Lincoln	Town Car	129	37565	2011
+74	Lincoln	MKX	111	141904	2011
+75	Lincoln	Navigator L	143	52301	2011
+76	Mitsubishi	Eclipse	201	138915	2011
+77	Mitsubishi	Outlander	157	33330	2011
+78	Mitsubishi	Endeavor	61	99746	2011
+79	Mitsubishi	Lancer	203	81307	2011
+80	Mitsubishi	Galant	10	102061	2011
+81	Mitsubishi	Lancer Evolution	152	72151	2011
+82	Mitsubishi	Outlander Sport	219	26356	2011
+83	Mercury	Mariner	53	116141	2011
+84	Mercury	Grand Marquis	116	26687	2011
+85	Mercury	Milan	177	100643	2011
+86	Maserati	GranTurismo	32	116688	2011
+87	Maserati	Quattroporte	222	115604	2011
+88	Chrysler	200	57	73822	2011
+89	Chrysler	300	58	26766	2011
+90	Chrysler	Town & Country	51	116409	2011
+91	Cadillac	DTS	180	80677	2011
+92	Cadillac	CTS-V	275	93520	2011
+93	Cadillac	CTS	111	61577	2011
+94	Cadillac	STS	128	137228	2011
+95	Cadillac	SRX	218	34742	2011
+96	Cadillac	Escalade	272	143421	2011
+97	Cadillac	Escalade ESV	272	105210	2011
+98	Cadillac	Escalade EXT	264	31718	2011
+99	Maybach	57	76	149438	2011
+100	Maybach	62	191	25841	2011
+101	Maybach	Landaulet	134	59620	2011
+102	Ferrari	458 Italia	233	123514	2011
+103	Bugatti	Veyron	45	83147	2011
+104	Lamborghini	Gallardo	15	143955	2011
+105	Tesla	Roadster	32	30292	2011
+106	Ram	1500	9	81920	2011
+107	Ram	2500	283	91509	2011
+108	Ram	3500	287	29698	2011
+109	Ram	Dakota	122	86615	2011
+110	Porsche	911	178	133539	2012
+111	Porsche	Cayenne	6	134442	2012
+112	Porsche	Panamera	153	113520	2012
+113	Porsche	Boxster	240	75995	2012
+114	Porsche	Cayman	135	107311	2012
+115	Nissan	Altima	297	52219	2012
+116	Nissan	370Z	273	28765	2012
+117	Nissan	Murano	257	149867	2012
+118	Nissan	Armada	96	33556	2012
+119	Nissan	Pathfinder	223	123888	2012
+120	Nissan	Leaf	80	31625	2012
+121	Nissan	Xterra	230	80719	2012
+122	Nissan	Titan	119	92049	2012
+123	Nissan	JUKE	20	84918	2012
+124	Nissan	Rogue	168	140882	2012
+125	Nissan	Maxima	14	138041	2012
+126	Nissan	Versa	159	118934	2012
+127	Nissan	Quest	31	127425	2012
+128	Nissan	Sentra	46	120394	2012
+129	Nissan	GT-R	46	47622	2012
+130	Nissan	cube	149	147375	2012
+131	Nissan	Frontier	153	35486	2012
+132	Nissan	NV1500	70	71271	2012
+133	Nissan	NV2500	107	83060	2012
+134	Nissan	NV3500	230	62253	2012
+135	Cadillac	CTS	280	110165	2012
+136	Cadillac	CTS-V	243	79961	2012
+137	Cadillac	Escalade	64	120511	2012
+138	Cadillac	SRX	73	94906	2012
+139	Cadillac	Escalade ESV	80	143656	2012
+140	Cadillac	Escalade EXT	198	33112	2012
+141	Audi	A3	24	117730	2012
+142	Audi	R8	31	139947	2012
+143	Audi	A6	61	49689	2012
+144	Audi	Q5	199	80010	2012
+145	Audi	A5	92	96267	2012
+146	Audi	A8	192	82556	2012
+147	Audi	TT	260	27748	2012
+148	Audi	A7	165	118620	2012
+149	Audi	S5	64	111336	2012
+150	Audi	A4	178	141245	2012
+151	Audi	Q7	160	132006	2012
+152	Audi	S4	292	121820	2012
+153	Volkswagen	Jetta	142	97286	2012
+154	Volkswagen	Golf	263	58095	2012
+155	Volkswagen	Routan	25	121936	2012
+156	Volkswagen	Touareg	55	146304	2012
+157	Volkswagen	Eos	65	37916	2012
+158	Volkswagen	New Beetle	58	105737	2012
+159	Volkswagen	Passat	134	100514	2012
+160	Volkswagen	Tiguan	72	137774	2012
+161	Volkswagen	GTI	51	29894	2012
+162	Volkswagen	CC	42	117903	2012
+163	Land Rover	Range Rover	37	47621	2012
+164	Land Rover	Discovery	3	92576	2012
+165	Land Rover	Range Rover Sport	280	84453	2012
+166	Land Rover	Range Rover Evoque	244	48331	2012
+167	Land Rover	LR2	251	120826	2012
+168	Land Rover	LR4	156	107723	2012
+169	Honda	Odyssey	2	37244	2012
+170	Honda	Accord	276	140957	2012
+171	Honda	Civic	170	133045	2012
+172	Honda	Ridgeline	123	78352	2012
+173	Honda	Fit	48	58702	2012
+174	Honda	Insight	157	22901	2012
+175	Honda	CR-Z	129	96803	2012
+176	Honda	Pilot	141	24128	2012
+177	Honda	FCX Clarity	170	27638	2012
+178	Honda	Crosstour	130	140582	2012
+179	Honda	CR-V	116	107712	2012
+180	Hyundai	HED-5	7	83829	2012
+181	Hyundai	Genesis	160	28883	2012
+182	Hyundai	Accent	47	88407	2012
+183	Hyundai	Equus	91	125659	2012
+184	Hyundai	Santa Fe	49	90389	2012
+185	Hyundai	Elantra	183	31768	2012
+186	Hyundai	Veracruz	6	69018	2012
+187	Hyundai	Sonata	222	80748	2012
+188	Hyundai	Tucson	106	117098	2012
+189	Hyundai	Veloster	220	129973	2012
+190	Hyundai	Azera	236	33779	2012
+191	Ford	Focus	195	132467	2012
+192	Ford	Mustang	287	139271	2012
+193	Ford	F-Series Super Duty	88	54860	2012
+194	Ford	E-Series	189	52325	2012
+195	Ford	Transit Connect	112	104788	2012
+196	Ford	Flex	171	34748	2012
+197	Ford	Escape	46	103804	2012
+198	Ford	Fusion	242	50367	2012
+199	Ford	Taurus	116	136945	2012
+200	Ford	Fiesta	297	20862	2012
+201	Ford	Explorer	62	72175	2012
+202	Ford	Expedition	228	115682	2012
+203	Ford	Edge	254	119482	2012
+204	Ford	E150	193	65142	2012
+205	Ford	E250	170	82724	2012
+206	Ford	E350	191	63218	2012
+207	Ford	Expedition EL	96	37846	2012
+208	Ford	F150	34	141952	2012
+209	Ford	F250	91	68863	2012
+210	Ford	F350	140	51605	2012
+211	Ford	F450	278	21246	2012
+212	GMC	Canyon	91	127505	2012
+213	GMC	Yukon	130	129016	2012
+214	GMC	Sierra	73	144998	2012
+215	GMC	Acadia	280	42836	2012
+216	GMC	Terrain	77	71253	2012
+217	GMC	Savana	27	57642	2012
+218	GMC	Savana 1500	85	116138	2012
+219	GMC	Savana 2500	242	28337	2012
+220	GMC	Savana 3500	132	102514	2012
+221	GMC	Sierra 1500	249	104815	2012
+222	GMC	Sierra 2500	1	48826	2012
+223	GMC	Sierra 3500	6	44170	2012
+224	GMC	Yukon XL 1500	182	47392	2012
+225	GMC	Yukon XL 2500	182	40268	2012
+226	Saab	9-3	65	20533	2012
+227	Volvo	C30	16	112863	2012
+228	Volvo	XC70	272	122536	2012
+229	Volvo	XC60	68	49766	2012
+230	Volvo	XC90	194	88832	2012
+231	Volvo	C70	218	43062	2012
+232	Volvo	S80	24	119068	2012
+233	Volvo	S60	26	41293	2012
+234	Chevrolet	Corvette	33	88497	2012
+235	Chevrolet	Colorado	126	33830	2012
+236	Chevrolet	Volt	265	112185	2012
+237	Chevrolet	Express	155	106118	2012
+238	Chevrolet	Sonic	67	39697	2012
+239	Chevrolet	Camaro	220	118060	2012
+240	Chevrolet	Cruze	279	129295	2012
+241	Chevrolet	Malibu	98	115063	2012
+242	Chevrolet	Traverse	17	31487	2012
+243	Chevrolet	Equinox	275	107831	2012
+244	Chevrolet	Impala	69	52362	2012
+245	Chevrolet	Avalanche	24	103497	2012
+246	Chevrolet	Express 1500	121	38997	2012
+247	Chevrolet	Express 2500	190	25315	2012
+248	Chevrolet	Express 3500	159	148153	2012
+249	Chevrolet	Silverado 1500	42	129452	2012
+250	Chevrolet	Silverado 2500	202	57161	2012
+251	Chevrolet	Silverado 3500	240	26461	2012
+252	Chevrolet	Suburban 1500	158	133442	2012
+253	Chevrolet	Suburban 2500	231	118097	2012
+254	Chevrolet	Tahoe	156	98615	2012
+255	MINI	Cooper	221	111063	2012
+256	MINI	Countryman	187	80953	2012
+257	MINI	Clubman	133	72304	2012
+258	MINI	Cooper Clubman	117	88461	2012
+259	MINI	Cooper Countryman	104	82092	2012
+260	BMW	1 Series	204	125763	2012
+261	BMW	3 Series	15	103489	2012
+262	BMW	5 Series	53	64024	2012
+263	BMW	6 Series	259	49190	2012
+264	BMW	7 Series	183	71228	2012
+265	BMW	M3	249	99051	2012
+266	BMW	X3	20	53411	2012
+267	BMW	X5	172	96067	2012
+268	BMW	X5 M	97	58105	2012
+269	BMW	X6	233	102794	2012
+270	BMW	X6 M	95	72729	2012
+271	BMW	Z4	257	139233	2012
+272	Lincoln	MKX	194	100472	2012
+273	Lincoln	Navigator	210	92493	2012
+274	Lincoln	MKS	187	78148	2012
+275	Lincoln	MKT	94	85958	2012
+276	Lincoln	MKZ	119	37292	2012
+277	Lincoln	Navigator L	83	114440	2012
+278	Toyota	4Runner	24	35643	2012
+279	Toyota	Highlander	255	52653	2012
+280	Toyota	Yaris	191	79033	2012
+281	Toyota	Prius v	89	98216	2012
+282	Toyota	FJ Cruiser	142	98226	2012
+283	Toyota	Camry Hybrid	81	110957	2012
+284	Toyota	Sequoia	182	64605	2012
+285	Toyota	RAV4	212	146230	2012
+286	Toyota	Sienna	260	77714	2012
+287	Toyota	Camry	173	87749	2012
+288	Toyota	Prius Plug-in Hybrid	117	65083	2012
+289	Toyota	Avalon	59	41613	2012
+290	Toyota	Corolla	274	125744	2012
+291	Toyota	Matrix	277	147017	2012
+292	Toyota	Prius	207	87157	2012
+293	Toyota	Prius c	271	114946	2012
+294	Toyota	Prius Plug-in	121	136553	2012
+295	Toyota	Tacoma	65	146055	2012
+296	Toyota	TundraMax	154	21066	2012
+297	Toyota	Tundra	38	25006	2012
+298	Toyota	Venza	251	102324	2012
+299	Acura	ZDX	151	95841	2012
+300	Acura	MDX	185	34901	2012
+301	Acura	TSX	54	61220	2012
+302	Acura	TL	219	70397	2012
+303	Acura	RL	161	125569	2012
+304	Acura	RDX	250	109560	2012
+305	Mercedes-Benz	G-Class	46	65824	2012
+306	Mercedes-Benz	CLS-Class	106	120483	2012
+307	Mercedes-Benz	GL-Class	106	64326	2012
+308	Mercedes-Benz	E-Class	75	146437	2012
+309	Mercedes-Benz	GLK-Class	229	141896	2012
+310	Mercedes-Benz	SLS AMG	133	99161	2012
+311	Mercedes-Benz	S-Class	120	128681	2012
+312	Mercedes-Benz	CL-Class	118	92931	2012
+313	Mercedes-Benz	C-Class	185	119324	2012
+314	Mercedes-Benz	SL-Class	64	138439	2012
+315	Mercedes-Benz	M-Class	106	43547	2012
+316	Mercedes-Benz	R-Class	6	99262	2012
+317	Mercedes-Benz	SLK-Class	249	24602	2012
+318	Mercedes-Benz	SLS-Class	172	134874	2012
+319	Mercedes-Benz	Sprinter 2500	257	85125	2012
+320	Mercedes-Benz	Sprinter 3500	102	73741	2012
+321	Infiniti	FX	104	91833	2012
+322	Infiniti	M	38	35891	2012
+323	Infiniti	G37	97	98907	2012
+324	Infiniti	G25	190	42665	2012
+325	Infiniti	QX56	115	71783	2012
+326	Infiniti	IPL G	276	100311	2012
+327	Infiniti	EX	106	112841	2012
+328	Infiniti	G	72	35277	2012
+329	Infiniti	QX	6	102982	2012
+330	Aston Martin	DBS	103	110811	2012
+331	Aston Martin	DB9	150	135529	2012
+332	Aston Martin	V12 Vantage	288	33889	2012
+333	Aston Martin	Virage	111	103881	2012
+334	Aston Martin	V8 Vantage	242	117084	2012
+335	Aston Martin	Rapide	258	112059	2012
+336	Aston Martin	V8 Vantage S	185	94151	2012
+337	Lexus	RX	221	117915	2012
+338	Lexus	LS	36	69779	2012
+339	Lexus	IS	159	25513	2012
+340	Lexus	IS-F	148	130756	2012
+341	Lexus	CT	237	143935	2012
+342	Lexus	RX Hybrid	137	126983	2012
+343	Lexus	LS Hybrid	263	110498	2012
+344	Lexus	ES	238	29355	2012
+345	Lexus	LFA	46	52940	2012
+346	Lexus	HS	276	56918	2012
+347	Lexus	GX	177	136153	2012
+348	FIAT	500	39	46398	2012
+349	Fiat	Nuova 500	222	38286	2012
+350	Dodge	Avenger	165	102881	2012
+351	Dodge	Caravan	192	49994	2012
+352	Dodge	Charger	88	64721	2012
+353	Dodge	Challenger	223	60612	2012
+354	Dodge	Caliber	144	148949	2012
+355	Dodge	Durango	169	120697	2012
+356	Dodge	Journey	33	34280	2012
+357	Dodge	Grand Caravan	179	80648	2012
+358	Suzuki	Kizashi	192	87959	2012
+359	Suzuki	Grand Vitara	13	77436	2012
+360	Suzuki	Equator	122	104159	2012
+361	Suzuki	SX4	1	82708	2012
+362	Subaru	Legacy	24	106419	2012
+363	Subaru	Impreza	107	105790	2012
+364	Subaru	Forester	111	24149	2012
+365	Subaru	Tribeca	240	119242	2012
+366	Subaru	Outback	131	114568	2012
+367	Ferrari	458 Italia	298	95348	2012
+368	Ferrari	FF	198	111618	2012
+369	Smart	Fortwo	220	132087	2012
+370	Jaguar	XF	195	33634	2012
+371	Jaguar	XK	252	122163	2012
+372	Jaguar	XJ	204	42103	2012
+373	Jeep	Wrangler	280	119243	2012
+374	Jeep	Compass	60	86487	2012
+375	Jeep	Grand Cherokee	84	89967	2012
+376	Jeep	Patriot	90	70176	2012
+377	Jeep	Liberty	204	66902	2012
+378	Mazda	Mazda5	175	32335	2012
+379	Mazda	Mazda2	287	27687	2012
+380	Mazda	CX-9	80	40427	2012
+381	Mazda	MX-5	21	115254	2012
+382	Mazda	Mazda6	222	130911	2012
+383	Mazda	Mazda3	64	57184	2012
+384	Mazda	Mazdaspeed 3	15	67164	2012
+385	Mazda	CX-7	44	123141	2012
+386	Mazda	Miata MX-5	101	86666	2012
+387	Lamborghini	Gallardo	297	124409	2012
+388	Lamborghini	Aventador	257	25362	2012
+389	Tesla	Model S	184	121033	2012
+390	Tesla	Roadster	216	138900	2012
+391	Buick	Verano	153	69177	2012
+392	Buick	LaCrosse	211	44746	2012
+393	Buick	Regal	112	123978	2012
+394	Buick	Enclave	65	149454	2012
+395	Chrysler	200	18	103628	2012
+396	Chrysler	300	84	103477	2012
+397	Chrysler	Town & Country	4	76209	2012
+398	Kia	Sportage	99	105634	2012
+399	Kia	Forte	77	147105	2012
+400	Kia	Optima	109	87871	2012
+401	Kia	Sedona	248	126903	2012
+402	Kia	Soul	286	42365	2012
+403	Kia	Sorento	81	95662	2012
+404	Kia	Rio	29	99802	2012
+405	Lotus	Exige	50	72204	2012
+406	Lotus	Evora	138	54223	2012
+407	Bentley	Continental GT	281	27708	2012
+408	Bentley	Mulsanne	112	74006	2012
+409	Bentley	Continental GTC	200	102119	2012
+410	Bentley	Continental Flying Spur	269	114955	2012
+411	Bentley	Continental Super	52	93379	2012
+412	Bentley	Continental	270	123388	2012
+413	Mitsubishi	Galant	115	92090	2012
+414	Mitsubishi	Eclipse	295	49383	2012
+415	Mitsubishi	Outlander	231	114173	2012
+416	Mitsubishi	i-MiEV	69	141566	2012
+417	Mitsubishi	Lancer	4	38172	2012
+418	Mitsubishi	Outlander Sport	3	130160	2012
+419	Scion	xB	125	31092	2012
+420	Scion	tC	72	108460	2012
+421	Scion	iQ	42	91611	2012
+422	Scion	xD	230	59757	2012
+423	Rolls-Royce	Ghost	284	124089	2012
+424	Rolls-Royce	Phantom	13	86452	2012
+425	Maserati	GranTurismo	249	83294	2012
+426	Maserati	Quattroporte	290	116273	2012
+427	Maybach	57	213	102940	2012
+428	Maybach	62	94	31828	2012
+429	Maybach	Landaulet	35	111098	2012
+430	McLaren	MP4-12C	152	110175	2012
+431	Ram	1500	139	39890	2012
+432	Ram	2500	101	118621	2012
+433	Ram	3500	153	103438	2012
+434	Ram	C/V	292	67932	2012
+435	Ford	Taurus	162	27328	2013
+436	Ford	C-MAX Hybrid	266	69708	2013
+437	Ford	Edge	55	140489	2013
+438	Ford	Escape	162	27635	2013
+439	Ford	Explorer	184	69591	2013
+440	Ford	Fiesta	71	113089	2013
+441	Ford	Flex	150	20476	2013
+442	Ford	Focus	69	91175	2013
+443	Ford	Focus ST	80	26564	2013
+444	Ford	Fusion	27	119638	2013
+445	Ford	Mustang	85	142203	2013
+446	Ford	Transit Connect	55	67313	2013
+447	Hyundai	Veloster	115	128199	2013
+448	Hyundai	Accent	110	112289	2013
+449	Hyundai	Elantra	160	116549	2013
+450	Hyundai	Equus	19	20085	2013
+451	Hyundai	Genesis Coupe	140	83252	2013
+452	Hyundai	Sonata	7	95634	2013
+453	Chevrolet	Cruze	144	149075	2013
+454	Chevrolet	Malibu	89	97357	2013
+455	Chevrolet	Tahoe	92	32635	2013
+456	Audi	S4	293	59195	2013
+457	BMW	X5	95	133025	2013
+458	BMW	X5 M	51	35075	2013
+459	BMW	X6	209	47581	2013
+460	BMW	X6 M	114	97264	2013
+461	GMC	Sierra 1500	168	127091	2013
+462	GMC	Yukon	25	123792	2013
+463	GMC	Yukon XL 1500	151	75530	2013
+464	GMC	Yukon XL 2500	35	23133	2013
+465	Infiniti	JX	222	55059	2013
+466	Jaguar	XK Series	158	75349	2013
+467	Kia	Rio	26	82088	2013
+468	Kia	Sorento	129	105790	2013
+469	Lexus	GS	282	105145	2013
+470	Lexus	LX	100	29299	2013
+471	Lexus	RX	282	115731	2013
+472	Lincoln	MKS	275	132680	2013
+473	Lincoln	MKT	288	45233	2013
+474	Lincoln	MKX	262	30570	2013
+475	Mazda	CX-5	107	53001	2013
+476	Mazda	MAZDA6	46	63055	2013
+477	Nissan	Altima	242	66540	2013
+478	Nissan	GT-R	201	72166	2013
+479	Porsche	911	64	35887	2013
+480	Porsche	Boxster	72	112570	2013
+481	Porsche	Cayenne	275	142230	2013
+482	Porsche	Panamera	255	129297	2013
+483	Rolls-Royce	Phantom	59	149779	2013
+484	Scion	FR-S	105	51278	2013
+485	Scion	tC	215	39470	2013
+486	Subaru	BRZ	129	84204	2013
+487	Toyota	Land Cruiser	93	29956	2013
+488	Toyota	Venza	98	44040	2013
+489	Volkswagen	CC	38	113045	2013
+490	Volvo	C30	52	64197	2013
+491	Volvo	C70	42	106916	2013
+492	Volvo	S60	284	64403	2013
+493	Volvo	XC90	38	34207	2013
+494	Audi	Audi R8	72	164000	2016
+499	Honda	Honda Clarity	20	30000	2010
+500	Honda	Honda Clarity	20	30000	2010
+503	Honda	Honda Clarity	30	50000	2008
+504	Honda	Honda Clarity	20	30000	2010
+506	Honda	Honda Clarity	30	50000	2008
+507	Honda	Honda Clarity	20	30000	2010
+508	Honda	Honda Clarity	20	30000	2010
+510	Honda	Honda Clarity	30	50000	2008
+511	Honda	Honda Clarity	20	30000	2010
+513	Honda	Honda Clarity	30	50000	2008
+495	Honda	Honda Clarity	25	80000	2016
+514	Honda	Honda Clarity	20	30000	2010
+516	Honda	Honda Clarity	30	50000	2008
+\.
+
+
+--
+-- Name: car_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('car_id_seq', 516, true);
+
+
+--
+-- Data for Name: car_service_station; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY car_service_station (id, car_id, service_station_id) FROM stdin;
+1	15	1
+5	499	5
+6	500	6
+7	504	7
+8	507	8
+9	508	9
+10	511	14
+11	514	19
+\.
+
+
+--
+-- Name: car_service_station_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('car_service_station_id_seq', 11, true);
+
+
+--
+-- Data for Name: mechanic; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY mechanic (id, name, surname, service_station_id) FROM stdin;
+3	Борис	Васильев	\N
+9	Иван	Петров	13
+10	Иван	Петров	15
+11	Борис	Васильев	\N
+13	Иван	Петров	20
+14	Борис	Васильев	\N
+1	Дмитрий	Иванов	\N
+\.
+
+
+--
+-- Name: mechanic_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('mechanic_id_seq', 15, true);
+
+
+--
+-- Data for Name: service_stations; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY service_stations (id, address) FROM stdin;
+1	Шевченка 52
+2	Гоголя 27
+3	Европейская 15
+4	Гоголя 27
+6	Гоголя 27
+7	Гоголя 27
+8	Гоголя 27
+9	Гоголя 27
+10	Петровского 128
+11	Петровского 128
+13	Железная 13
+14	Гоголя 27
+15	Железная 13
+16	Петровского 128
+17	Петровского 128
+19	Гоголя 27
+20	Железная 13
+21	Петровского 128
+22	Петровского 128
+5	Петровского 128
+\.
+
+
+--
+-- Name: service_stations _id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('"service_stations _id_seq"', 23, true);
+
+
+--
+-- Name: car car_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY car
+    ADD CONSTRAINT car_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: car_service_station car_service_station_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY car_service_station
+    ADD CONSTRAINT car_service_station_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: mechanic mechanic_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY mechanic
+    ADD CONSTRAINT mechanic_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: service_stations service_stations _pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY service_stations
+    ADD CONSTRAINT "service_stations _pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: fki_fk; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX fki_fk ON mechanic USING btree (service_station_id);
+
+
+--
+-- Name: fki_fk_car_id; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX fki_fk_car_id ON car_service_station USING btree (car_id);
+
+
+--
+-- Name: fki_fk_service_station_id; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX fki_fk_service_station_id ON car_service_station USING btree (service_station_id);
+
+
+--
+-- Name: car_service_station fk_car_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY car_service_station
+    ADD CONSTRAINT fk_car_id FOREIGN KEY (car_id) REFERENCES car(id);
+
+
+--
+-- Name: mechanic fk_service_station_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY mechanic
+    ADD CONSTRAINT fk_service_station_id FOREIGN KEY (service_station_id) REFERENCES service_stations(id);
+
+
+--
+-- Name: car_service_station fk_service_station_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY car_service_station
+    ADD CONSTRAINT fk_service_station_id FOREIGN KEY (service_station_id) REFERENCES service_stations(id);
+
+
+--
+-- PostgreSQL database dump complete
+--
+
