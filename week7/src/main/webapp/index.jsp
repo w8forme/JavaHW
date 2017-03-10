@@ -6,7 +6,6 @@
     <title>Welcome</title>
 </head>
 <body>
-<%--<a href="studentsList.jsp">List of students</a>--%>
 <jsp:forward page="/StudentController.do?action=listStudent"></jsp:forward>
 </body>
 </html>

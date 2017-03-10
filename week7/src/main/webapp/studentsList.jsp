@@ -12,6 +12,11 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" pageEncoding="UTF-8">
     <title>Show All Students</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
 </head>
 <body>
 <table>
