@@ -20,9 +20,6 @@
             </plugin>
         </plugins>
     </build>
-    <modules>
-        <module>week6</module>
-    </modules>
     <dependencies>
         <dependency>
             <groupId>com.google.code.gson</groupId>
