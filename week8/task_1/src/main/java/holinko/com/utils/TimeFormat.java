@@ -1,4 +1,4 @@
-package holinko.com.controller;
+package holinko.com.utils;
 
 /**
  * Created by Pavel

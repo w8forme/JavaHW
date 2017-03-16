@@ -1,4 +1,4 @@
-package holinko.com.controller;
+package holinko.com.utils;
 
 import org.apache.commons.io.FileUtils;
 
@@ -36,7 +36,13 @@ public class CacheWriter extends FileWriterImpl
     {
         if (!cache.isEmpty())
         {
-            //write();
+            try
+            {
+                FileUtils.write(file, cache.toString(), true);
+            } catch (IOException e)
+            {
+                e.printStackTrace();
+            }
             cache.clear();
             cache = null;
         }
@@ -47,16 +53,10 @@ public class CacheWriter extends FileWriterImpl
     {
         try
         {
-            StringBuilder sb = new StringBuilder();
-            cache.add(msg + "\n");
+            cache.add(msg);
             if (cache.size() == cacheSize)
             {
-                System.out.println(cache.toString());
                 FileUtils.write(file, cache.toString(), true);
-                for (String s : cache)
-                {
-                    sb.append(s + "\n");
-                }
                 cache.clear();
             }
         } catch (IOException e)

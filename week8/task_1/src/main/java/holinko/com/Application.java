@@ -1,17 +1,10 @@
-package holinko.com.controller;
+package holinko.com;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.safety.Cleaner;
-import org.jsoup.safety.Whitelist;
-import org.jsoup.select.Elements;
+import holinko.com.utils.FileWriter;
+import holinko.com.utils.NewsReader;
+import holinko.com.utils.TimeFormat;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Pavel
@@ -32,7 +25,7 @@ public class Application
 
     public static void main(String[] args) throws InterruptedException
     {
-        ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
+        ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext("springCacheWriter.xml");
         Application app = (Application) ctx.getBean("app");
         while (true)
         {

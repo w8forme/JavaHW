@@ -1,9 +1,8 @@
-package holinko.com.controller;
+package holinko.com.utils;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.util.Date;
+
 import org.apache.commons.io.FileUtils;
 
 /**

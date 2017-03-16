@@ -1,4 +1,4 @@
-package holinko.com.controller;
+package holinko.com.utils;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -7,9 +7,7 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Pavel
