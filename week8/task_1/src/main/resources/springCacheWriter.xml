@@ -9,13 +9,12 @@
     </bean>
 
     <bean id="appTime" class="holinko.com.utils.NewsLastTime" scope="prototype" >
+
         <constructor-arg>
             <bean class="java.util.Date" />
         </constructor-arg>
-        <!--<constructor-arg ref="df" />-->
     </bean>
-    <!--<bean id="df" class="java.text.DateFormat" factory-method="getTimeInstance" />-->
-    <bean id="app" class="holinko.com.Application" scope="prototype" lazy-init="true">
+    <bean id="app" class="holinko.com.Application" lazy-init="true">
         <constructor-arg ref="newsReader" />
         <constructor-arg ref="fileWriter" />
         <constructor-arg ref="appTime" />

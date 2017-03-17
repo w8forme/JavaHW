@@ -1,5 +1,7 @@
 package holinko.com.utils;
 
+import org.springframework.stereotype.Component;
+
 /**
  * Created by Pavel
  */

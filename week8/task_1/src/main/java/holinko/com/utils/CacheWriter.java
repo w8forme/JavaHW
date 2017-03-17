@@ -1,6 +1,8 @@
 package holinko.com.utils;
 
 import org.apache.commons.io.FileUtils;
+import org.springframework.stereotype.Component;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,6 +11,7 @@ import java.util.List;
 /**
  * Created by Pavel
  */
+@Component
 public class CacheWriter extends FileWriterImpl
 {
     private int cacheSize;

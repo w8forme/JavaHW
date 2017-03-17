@@ -3,8 +3,10 @@ package holinko.com.utils;
 /**
  * Created by Pavel
  */
+import org.springframework.stereotype.Component;
 import java.util.Date;
 
+@Component
 public class NewsLastTime implements TimeFormat
 {
     private Date date;
