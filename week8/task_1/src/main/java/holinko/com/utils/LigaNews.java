@@ -49,23 +49,35 @@ public class LigaNews implements NewsReader
     private List<String> parseNews()
     {
         List<String> result = new ArrayList<String>();
-        try
+        Document document = null;
+        while (null == document)
         {
-            Document document = prepareDoc();
-            Elements links = document.select("#all_news .title a[href]");
-            Elements titles = document.select("#all_news .title a");
-            for (int i = 0, j = 0; i < titles.size(); i++, j++)
+            try
             {
-                Element link = links.get(j);
-                String href = link.attr("abs:href");
-                String text = parseText(href);
-                String title = titles.get(i).text();
-                result.add(title + "\n" + text + "\n");
+                document = prepareDoc();
+                Elements links = document.select("#all_news .title a[href]");
+                Elements titles = document.select("#all_news .title a");
+                for (int i = 0, j = 0; i < titles.size(); i++, j++)
+                {
+                    Element link = links.get(j);
+                    String href = link.attr("abs:href");
+                    String text = parseText(href);
+                    String title = titles.get(i).text();
+                    result.add(title + "\n" + text + "\n");
+                }
+            } catch (IOException e)
+            {
+                //e.printStackTrace();
+                System.err.println("Connection lost. Please check your internet connection.");
+                System.err.println("Wait for reconnect...");
+                try
+                {
+                    Thread.sleep(10000);
+                } catch (InterruptedException e1)
+                {
+                    e1.printStackTrace();
+                }
             }
-        } catch (IOException e)
-        {
-            e.printStackTrace();
-            System.err.println("Connection error");
         }
         return result;
     }

@@ -17,7 +17,7 @@ public class FileWriterImpl implements FileWriter
     public FileWriterImpl(String name)
     {
         this.name = name;
-        System.out.println("In constr FileWriterImpl...");
+        System.out.println("In constr FileWriterImpl");
     }
 
     @Override

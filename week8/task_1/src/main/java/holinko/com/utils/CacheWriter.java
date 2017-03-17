@@ -1,7 +1,6 @@
 package holinko.com.utils;
 
 import org.apache.commons.io.FileUtils;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,7 +23,7 @@ public class CacheWriter extends FileWriterImpl
 
     public void init() throws IOException
     {
-        System.out.println("In constr init()...");
+        System.out.println("In method init");
         super.file = new File(super.name);
         if (!file.canWrite())
         {
@@ -34,11 +33,13 @@ public class CacheWriter extends FileWriterImpl
 
     public void destroy()
     {
+        System.out.println("In destroy method");
         if (!cache.isEmpty())
         {
             try
             {
-                FileUtils.write(file, cache.toString(), true);
+                String textMsg = doTextNews(cache);
+                FileUtils.write(file, textMsg, true);
             } catch (IOException e)
             {
                 e.printStackTrace();
@@ -46,6 +47,19 @@ public class CacheWriter extends FileWriterImpl
             cache.clear();
             cache = null;
         }
+    }
+
+    //This method create text from list for writing into file
+    private String doTextNews(List<String> cache)
+    {
+        StringBuilder sb = new StringBuilder();
+        String result;
+        for (String text : cache)
+        {
+            sb.append(text);
+        }
+        result = sb.toString();
+        return result;
     }
 
     @Override
@@ -56,7 +70,8 @@ public class CacheWriter extends FileWriterImpl
             cache.add(msg);
             if (cache.size() == cacheSize)
             {
-                FileUtils.write(file, cache.toString(), true);
+                String textMsg = doTextNews(cache);
+                FileUtils.write(file, textMsg, true);
                 cache.clear();
             }
         } catch (IOException e)
