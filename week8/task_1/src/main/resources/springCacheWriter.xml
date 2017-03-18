@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="newsReader" class="holinko.com.utils.LigaNews"/>
+    <bean id="fileWriter" class="holinko.com.utils.CacheWriter" init-method="init" destroy-method="destroy">
+        <constructor-arg value="20"/>
+        <constructor-arg value="ua_news.txt"/>
+    </bean>
+
+    <bean id="appTime" class="holinko.com.utils.NewsLastTime" scope="prototype" >
+        <constructor-arg>
+            <bean class="java.util.Date" />
+        </constructor-arg>
+    </bean>
+    <bean id="app" class="holinko.com.Application" lazy-init="true">
+        <constructor-arg ref="newsReader" />
+        <constructor-arg ref="fileWriter" />
+    </bean>
+</beans>
