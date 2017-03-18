@@ -44,7 +44,6 @@ public class CacheWriter extends FileWriterImpl
             {
                 String textMsg = doTextNews(cache);
                 FileUtils.write(file, textMsg, true);
-                cache.clear();
             } catch (IOException e)
             {
                 e.printStackTrace();

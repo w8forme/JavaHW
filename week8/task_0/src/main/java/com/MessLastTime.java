@@ -1,19 +1,18 @@
 package com;
 
-import java.text.DateFormat;
 import java.util.Date;
 
-public class MessLastTime {
+public class MessLastTime
+{
     private Date date;
-    private DateFormat df;
 
-    public MessLastTime(Date date, DateFormat df){
+    public MessLastTime(Date date)
+    {
         this.date = date;
-        this.df = df;
-        System.out.println("In constr MessLastTime...");
     }
 
-    public String getMessLastTime(String str){
-        return date + ": " + str;
+    public String getMessLastTime(String str)
+    {
+        return date + ": " + str + "\n";
     }
 }

@@ -34,9 +34,9 @@ public class Application
 
     public static void main(String[] args) throws InterruptedException
     {
-        //ApplicationContext ctx = new ClassPathXmlApplicationContext("springCacheWriter.xml");
+        ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("springCacheWriter.xml");
         //Uncomment this code for annotations configuration
-        ApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
+        //AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
 
         Application app = (Application) ctx.getBean("app");
         while (true)
@@ -51,5 +51,6 @@ public class Application
             }
             Thread.sleep(10000);
         }
+        //ctx.close();
     }
 }

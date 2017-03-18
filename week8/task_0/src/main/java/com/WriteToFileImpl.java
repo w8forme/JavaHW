@@ -1,10 +1,11 @@
 package com;
 
 import org.apache.commons.io.FileUtils;
-
+import org.springframework.stereotype.Component;
 import java.io.File;
 import java.io.IOException;
 
+@Component
 public class WriteToFileImpl implements Writer
 {
     protected File file;
@@ -13,16 +14,11 @@ public class WriteToFileImpl implements Writer
     public WriteToFileImpl(String name)
     {
         this.name = name;
-        System.out.println("In constr WriteToFileImpl...");
     }
 
-//    public void init() throws IOException{
-//        System.out.println("In constr init()...");
-//        file = new File(name);
-//        if (!file.canWrite()){
-//            System.out.println("Cannot write file");
-//        }
-//    }
+    public WriteToFileImpl()
+    {
+    }
 
     @Override
     public void write(String msg)

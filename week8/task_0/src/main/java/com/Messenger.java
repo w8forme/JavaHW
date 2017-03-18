@@ -1,5 +1,6 @@
 package com;
 
-public interface Messenger {
+public interface Messenger
+{
     String getMessage();
 }

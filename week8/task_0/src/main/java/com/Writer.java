@@ -1,5 +1,6 @@
 package com;
 
-public interface Writer {
+public interface Writer
+{
     void write(String msg);
 }

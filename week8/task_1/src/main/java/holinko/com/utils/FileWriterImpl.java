@@ -21,7 +21,6 @@ public class FileWriterImpl implements FileWriter
 
     public FileWriterImpl()
     {
-        this.name = "ua_name.txt";
     }
 
     @Override

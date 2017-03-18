@@ -6,17 +6,12 @@
      http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
 
     <bean id="messenger" class="com.MessengerImpl"/>
-
-    <!--<bean id="writer" class="com.WriteToFileImpl" init-method="init" >-->
-        <!--<constructor-arg index="0" value="storage.txt"/>-->
-    <!--</bean>-->
-
     <bean id="cacheWriter" class="com.CacheWriter" destroy-method="destroy" init-method="init" >
         <constructor-arg value="4"/>
         <constructor-arg value="storage.txt"/>
     </bean>
 
-    <bean id="app" class="com.Application" scope="prototype" lazy-init="true">
+    <bean id="app" class="com.Application" lazy-init="true">
         <constructor-arg ref="cacheWriter" />
         <constructor-arg ref="messenger" />
     </bean>
@@ -27,6 +22,5 @@
         <constructor-arg>
             <bean class="java.util.Date" />
         </constructor-arg>
-        <constructor-arg ref="df" />
     </bean>
 </beans>

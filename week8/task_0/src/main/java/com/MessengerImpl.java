@@ -1,14 +1,19 @@
 package com;
 
+import org.springframework.stereotype.Component;
+
 import java.util.Scanner;
 
-public class MessengerImpl implements Messenger {
-    public MessengerImpl() {
-        System.out.println("In constr MessengerImpl...");
+@Component
+public class MessengerImpl implements Messenger
+{
+    public MessengerImpl()
+    {
     }
 
     @Override
-    public String getMessage() {
+    public String getMessage()
+    {
         System.out.println("Input your message");
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
