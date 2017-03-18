@@ -5,6 +5,7 @@ import holinko.com.utils.FileWriter;
 import holinko.com.utils.NewsLastTime;
 import holinko.com.utils.NewsReader;
 import holinko.com.utils.TimeFormat;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -20,14 +21,15 @@ public class Application
 {
     private FileWriter fileWriter;
     private NewsReader newsReader;
-    private TimeFormat timeFormat;
 
-    public Application(FileWriter fileWriter, NewsReader newsReader, TimeFormat timeFormat)
+    public Application(FileWriter fileWriter, NewsReader newsReader)
     {
         this.fileWriter = fileWriter;
         this.newsReader = newsReader;
-        this.timeFormat = timeFormat;
-        System.out.println("in Application constr");
+    }
+
+    public Application()
+    {
     }
 
     public static void main(String[] args) throws InterruptedException
@@ -49,6 +51,5 @@ public class Application
             }
             Thread.sleep(10000);
         }
-        //ctx.close();
     }
 }

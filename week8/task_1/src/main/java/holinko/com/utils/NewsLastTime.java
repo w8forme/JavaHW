@@ -13,8 +13,9 @@ public class NewsLastTime implements TimeFormat
 
     public NewsLastTime(Date date){
         this.date = date;
-        System.out.println("In constr NewsLastTime");
     }
+
+    public NewsLastTime(){}
 
     @Override
     public String getNewsTime(String str)

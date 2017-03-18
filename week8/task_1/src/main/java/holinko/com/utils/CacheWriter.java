@@ -1,6 +1,7 @@
 package holinko.com.utils;
 
 import org.apache.commons.io.FileUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
@@ -24,9 +25,10 @@ public class CacheWriter extends FileWriterImpl
         this.cache = new ArrayList<String>(cacheSize);
     }
 
+    public CacheWriter(){}
+
     public void init() throws IOException
     {
-        System.out.println("In method init");
         super.file = new File(super.name);
         if (!file.canWrite())
         {
@@ -36,13 +38,13 @@ public class CacheWriter extends FileWriterImpl
 
     public void destroy()
     {
-        System.out.println("In destroy method");
         if (!cache.isEmpty())
         {
             try
             {
                 String textMsg = doTextNews(cache);
                 FileUtils.write(file, textMsg, true);
+                cache.clear();
             } catch (IOException e)
             {
                 e.printStackTrace();

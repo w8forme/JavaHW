@@ -40,7 +40,13 @@ public class LigaNews implements NewsReader
         //Delete from text advertising information
         for (Element element : newsText.select("b"))
         {
-            element.remove();
+            String adv = element.text().toLowerCase();
+            if ((adv.contains("Читайте также:".toLowerCase()))
+                    || adv.contains("Подписывайтесь на аккаунт".toLowerCase())
+                    || adv.contains("Читайте нас:".toLowerCase()))
+            {
+                element.remove();
+            }
         }
         //Select news text and put in map as value
         Elements elements = newsText.select("div.text._ga1_on_ p");

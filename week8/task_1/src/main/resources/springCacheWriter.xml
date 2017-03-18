@@ -9,7 +9,6 @@
     </bean>
 
     <bean id="appTime" class="holinko.com.utils.NewsLastTime" scope="prototype" >
-
         <constructor-arg>
             <bean class="java.util.Date" />
         </constructor-arg>
@@ -17,6 +16,5 @@
     <bean id="app" class="holinko.com.Application" lazy-init="true">
         <constructor-arg ref="newsReader" />
         <constructor-arg ref="fileWriter" />
-        <constructor-arg ref="appTime" />
     </bean>
 </beans>

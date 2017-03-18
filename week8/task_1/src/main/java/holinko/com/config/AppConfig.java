@@ -3,7 +3,6 @@ package holinko.com.config;
 import holinko.com.Application;
 import holinko.com.utils.*;
 import org.springframework.context.annotation.*;
-
 import java.util.Date;
 
 /**
@@ -17,7 +16,7 @@ public class AppConfig
     @Lazy
     public Application app()
     {
-        return new Application(fileWriter(), newsReader(), appTime());
+        return new Application(fileWriter(), newsReader());
     }
 
     @Bean
